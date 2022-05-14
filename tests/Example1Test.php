@@ -1,12 +1,14 @@
 <?php
 
 use PHPUnit\Framework\TestCase;
+use PricingComparison\Model\Comparison;
 
 class Example1Test extends TestCase 
 {
     public function testEmpty()
     {
-        $this->assertTrue(false);
+        $c = new Comparison();
+        $this->assertTrue($c->getX());
     }
 
     public function getInputOrderData(): array
