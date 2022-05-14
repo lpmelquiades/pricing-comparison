@@ -23,10 +23,10 @@ final class CostCalc implements CostCalcInterface
         $costItems = [];
 
         foreach ($orderItems as $orderItem) {
-            $productOffers = $offers[$orderItem->getProduct()];
+            $offersByProduct = $offers[$orderItem->getProduct()];
             array_push(
                 $costItems, 
-                ...$this->calcCostItem($orderItem->getUnits(), $productOffers)
+                ...$this->calcCostItem($orderItem->getUnits(), $offersByProduct)
             );
         }
         

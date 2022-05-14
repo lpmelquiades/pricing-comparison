@@ -41,4 +41,10 @@ final class OfferProvision implements OfferProvisionInterface
         return $this->remainedUnits;
     }
  
+    public function getCostItem(Offer $offer): array {
+        if ($this->quantityNeeded > 0) {
+            return [new CostItem($offer, $this->quantityNeeded)];
+        }
+    }
+
 }
