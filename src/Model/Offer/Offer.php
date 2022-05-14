@@ -23,6 +23,23 @@ final class Offer implements Buildable, Mapable
         float $price,
         string $currency
     ) {
+
+        if (strlen(trim($product)) < 1) {
+            throw new OfferDomainException('offer_invalid_product');
+        }
+
+        if (strlen(trim($currency)) !== 3) {
+            throw new OfferDomainException('offer_invalid_currency');            
+        }
+
+        if ($units < 1) {
+            throw new OfferDomainException('offer_invalid_units');
+        }
+
+        if ($price <= 0.0) {
+            throw new OfferDomainException('offer_invalid_price');
+        }
+
         $this->product = $product;
         $this->units = $units;
         $this->price = $price;
