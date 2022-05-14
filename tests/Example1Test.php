@@ -6,19 +6,20 @@ namespace PricingComparison\Tests;
 
 use PHPUnit\Framework\TestCase;
 use PricingComparison\Model\Comparison;
+use PricingComparison\Model\Result;
 
 class Example1Test extends TestCase 
 {
-    public function testEmpty()
+    public function testComparison()
     {
         $c = Comparison::build([
             'orderItems' => $this->getInputOrderData(),
             'suppliers' => DataProvider::getSuppliers()
         ]);
 
-        var_dump($c);
 
-        $this->assertTrue(false);
+        $expectedResult = new Result('Supplier B', 102.0, 'EUR');
+        $this->assertEquals($c->getResult(), $expectedResult);
     }
 
     public function getInputOrderData(): array

@@ -22,6 +22,11 @@ final class Comparison implements Buildable
         $this->calcResultSteps();
     }
 
+    public function getResult(): Result
+    {
+        return $this->result;
+    }
+
     public static function build(array $entry)
     {
         return new static(
