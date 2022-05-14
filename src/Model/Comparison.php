@@ -6,7 +6,7 @@ namespace PricingComparison\Model;
 
 final class Comparison implements Buildable
 {
-    use BuildEntries;
+    use BuildMany;
 
     private $orderItems;
     private $suppliers;
@@ -18,19 +18,19 @@ final class Comparison implements Buildable
     ) {
         $this->orderItems = $orderItems;
         $this->suppliers = $suppliers;
-        // $this->costs = $this->makeCosts($order, $suppliers);
+        // $this->costs = $this->calcCosts($orderItems, $suppliers);
 //        $this->result = $this->makeResult();
     }
 
     public static function build(array $entry)
     {
         return new static(
-            static::buildEntries(OrderItem::class, $entry['orderItems']),
-            static::buildEntries(Supplier::class, $entry['suppliers'])
+            static::buildMany(OrderItem::class, $entry['orderItems']),
+            static::buildMany(Supplier::class, $entry['suppliers'])
         );
     }
 
-    // private function makeCosts (
+    // private function calcCosts (
     //     array $orderItems,
     //     array $suppliers
     // ): array {

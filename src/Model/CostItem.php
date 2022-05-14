@@ -4,17 +4,13 @@ declare(strict_types=1);
 
 namespace PricingComparison\Model;
 
-final class Cost
+//    5 x 1 Unit Dental Floss - 45 EUR
+final class CostItem
 {
-    private $supplier;
-    private $costItems;
-    private $totalPrice;
-    private $currency;
+    private $offer;
+    private $quantity;
 
-    public function __construct (
-        string $label,
-        array $costItems
-    ) {
+    public function __construct (Offer $label) {
         $this->label = $label;
         $this->costItems = $costItems;
     }

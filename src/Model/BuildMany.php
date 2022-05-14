@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace PricingComparison\Model;
 
-trait BuildEntries
+trait BuildMany
 {
-    private static function buildEntries($class, array $entries): array {
+    private static function buildMany($class, array $entries): array {
         $instances = [];
         foreach ($entries as $e) {
             array_push($instances, $class::build($e));

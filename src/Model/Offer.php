@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PricingComparison\Model;
 
-final class Offer implements Buildable
+final class Offer implements Buildable, Mapable
 {
     use Build;
 
@@ -23,6 +23,16 @@ final class Offer implements Buildable
         $this->units = $units;
         $this->price = $price;
         $this->currency = $currency;
+    }
+
+    public function getKey(): string
+    {
+        return $this->product;
+    }
+
+    public function getUnits(): int
+    {
+        return $this->units;
     }
     
 }
