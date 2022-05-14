@@ -2,20 +2,15 @@
 
 declare(strict_types=1);
 
-namespace PricingComparison\Model;
+namespace PricingComparison\Model\Offer;
 
-//sera carregado pelo banco
 final class CostCalc implements CostCalcInterface
 {
 
-    public function calc(
-        string $supplier, 
-        array $orderItems, 
-        array $offers
-    ): Cost {
+    public function calc(Supplier $supplier, array $orderItems): Cost {
         return new Cost(
-            $supplier, 
-            $this->calcCostItems($orderItems, $offers)
+            $supplier->getName(), 
+            $this->calcCostItems($orderItems, $supplier->getOffers())
         );
     }
 
@@ -38,10 +33,9 @@ final class CostCalc implements CostCalcInterface
 
         for ($i = 0; $i <= count($offers) && $remainedUnits != 0; $i++) {
             $offer = $offers[$i];
-
-            $provision = $offer->getProvision($remainedUnits);
+            $provision = new Provision($remainedUnits, $offer->getUnits());
         
-            if ($provision->getQuantityNeeded() > 0){
+            if ($provision->getQuantityNeeded() > 0) {
                 array_push(
                     $costItems, 
                     new CostItem($offer, $provision->getQuantityNeeded())
@@ -52,6 +46,5 @@ final class CostCalc implements CostCalcInterface
         }
 
         return $costItems;
-    }
-    
+    }   
 }

@@ -2,7 +2,9 @@
 
 declare(strict_types=1);
 
-namespace PricingComparison\Model;
+namespace PricingComparison\Model\Offer;
+
+use PricingComparison\Model\Result;
 
 final class Cost
 {
@@ -23,7 +25,7 @@ final class Cost
             $this->totalPrice += $costItem->getTotalPrice();
         }
     }
-
+    
     public function getTotalPrice(): float
     {
         return $this->totalPrice;

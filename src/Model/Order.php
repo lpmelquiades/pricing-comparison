@@ -4,6 +4,10 @@ declare(strict_types=1);
 
 namespace PricingComparison\Model;
 
+use PricingComparison\Model\Offer\Supplier;
+use PricingComparison\Model\Offer\CostCalc;
+use PricingComparison\Model\Offer\CostCalcInterface;
+
 final class Order implements Buildable
 {
     use BuildMany;
@@ -12,13 +16,16 @@ final class Order implements Buildable
     private $suppliers;
     private $costs;
     private $result;
+    private $costCalc;
 
     private function __construct (
         array $orderItems,
-        array $suppliers
+        array $suppliers,
+        CostCalcInterface $costCalc
     ) {
         $this->orderItems = $orderItems;
         $this->suppliers = $suppliers;
+        $this->costCalc = $costCalc;
         $this->calcResultSteps();
     }
 
@@ -30,8 +37,9 @@ final class Order implements Buildable
     public static function build(array $entry)
     {
         return new static(
-            static::buildMany(OrderItem::class, $entry['orderItems']),
-            static::buildMany(Supplier::class, $entry['suppliers'])
+            static::buildMany(Item::class, $entry['orderItems']),
+            static::buildMany(Supplier::class, $entry['suppliers']),
+            new CostCalc()
         );
     }
 
@@ -44,7 +52,10 @@ final class Order implements Buildable
     {
         $this->costs = [];
         foreach ($this->suppliers as $supplier) {
-            array_push($this->costs, $supplier->calcCost($this->orderItems));
+            array_push(
+                $this->costs, 
+                $this->costCalc->calc($supplier, $this->orderItems)
+            );
         }
     }
 

@@ -2,7 +2,10 @@
 
 declare(strict_types=1);
 
-namespace PricingComparison\Model;
+namespace PricingComparison\Model\Offer;
+
+use PricingComparison\Model\Build;
+use PricingComparison\Model\Buildable;
 
 final class Offer implements Buildable, Mapable
 {
@@ -50,11 +53,6 @@ final class Offer implements Buildable, Mapable
     public function getCurrency(): string
     {
         return $this->currency; 
-    }
-
-    public function getProvision(int $orderUnits): OfferProvisionInterface
-    {
-        return new OfferProvision($orderUnits, $this->units);
     }
  
 }

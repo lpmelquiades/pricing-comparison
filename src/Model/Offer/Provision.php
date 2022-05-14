@@ -2,15 +2,16 @@
 
 declare(strict_types=1);
 
-namespace PricingComparison\Model;
+namespace PricingComparison\Model\Offer;
 
-final class OfferProvision implements OfferProvisionInterface
+final class Provision implements ProvisionInterface
 {
 
     private $orderUnits;
     private $offerUnits;
     private $quantityNeeded;
     private $remainedUnits;
+    private $offer;
 
     public function __construct (
         int $orderUnits,
@@ -39,12 +40,6 @@ final class OfferProvision implements OfferProvisionInterface
 
     public function getRemainedUnits(): int {
         return $this->remainedUnits;
-    }
- 
-    public function getCostItem(Offer $offer): array {
-        if ($this->quantityNeeded > 0) {
-            return [new CostItem($offer, $this->quantityNeeded)];
-        }
     }
 
 }

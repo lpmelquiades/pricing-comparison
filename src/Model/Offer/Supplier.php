@@ -2,7 +2,10 @@
 
 declare(strict_types=1);
 
-namespace PricingComparison\Model;
+namespace PricingComparison\Model\Offer;
+
+use PricingComparison\Model\BuildMany;
+use PricingComparison\Model\Buildable;
 
 //sera carregado pelo banco
 final class Supplier implements Buildable
@@ -11,21 +14,24 @@ final class Supplier implements Buildable
 
     private $name;
     private $offers;
-    private $costCalc;
 
     private function __construct (
         string $name,
         array $offers,
-        OffersBuilder $offersBuilder,
-        CostCalcInterface $costCalc
+        OffersBuilder $offersBuilder
     ) { 
         $this->name = $name;
         $this->offers = $offersBuilder->build($offers);
-        $this->costCalc = $costCalc;
     }
 
-    public function calcCost(array $orderItems): Cost {
-        return $this->costCalc->calc($this->name, $orderItems, $this->offers);
+    public function getName(): string
+    {
+        return $this->name;
+    }
+
+    public function getOffers(): array
+    {
+        return $this->offers;
     }
 
     //isso aqui vai ir pra um handler
@@ -34,8 +40,7 @@ final class Supplier implements Buildable
         return new static(
             $entry['supplier'],
             static::buildMany(Offer::class, $entry['offers']),
-            new OfferMapBuilder(),
-            new CostCalc()
+            new OfferMapBuilder()
         );
     }
     
