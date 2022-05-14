@@ -12,15 +12,29 @@ final class Cost
     private $currency;
 
     public function __construct (
-        string $label,
+        string $supplier,
         array $costItems
     ) {
-        $this->label = $label;
+        $this->supplier = $supplier;
         $this->costItems = $costItems;
+        $this->currency = $costItems[0]->getCurrency();
+        $this->totalPrice = 0.0;
+        foreach ($costItems as $costItem) {
+            $this->totalPrice += $costItem->getTotalPrice();
+        }
     }
 
-    public function calcCost(Order $order): Cost
+    public function getTotalPrice(): float
     {
-        
+        return $this->totalPrice;
+    }
+
+    public function getResult(): Result
+    {
+        return new Result(
+            $this->supplier,
+            $this->totalPrice,
+            $this->currency
+        );
     }
 }

@@ -9,14 +9,21 @@ final class CostItem
 {
     private $offer;
     private $quantity;
+    private $totalPrice;
 
-    public function __construct (Offer $label) {
-        $this->label = $label;
-        $this->costItems = $costItems;
+    public function __construct (Offer $offer, float $quantity) {
+        $this->offer = $offer;
+        $this->quantity = $quantity;
+        $this->totalPrice = $offer->getPrice() * $quantity;
     }
 
-    public function calcCost(Order $order): Cost
+    public function getCurrency(): string
     {
-        
+        return $this->offer->getCurrency();
+    }
+
+    public function getTotalPrice(): float
+    {
+        return $this->totalPrice;
     }
 }

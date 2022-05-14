@@ -11,6 +11,7 @@ final class Offer implements Buildable, Mapable
     private $product;
     private $units;
     private $price;
+    private $pricePerUnit;
     private $currency;
 
     private function __construct (
@@ -23,6 +24,7 @@ final class Offer implements Buildable, Mapable
         $this->units = $units;
         $this->price = $price;
         $this->currency = $currency;
+        $this->pricePerUnit = $price/$units;
     }
 
     public function getKey(): string
@@ -34,5 +36,19 @@ final class Offer implements Buildable, Mapable
     {
         return $this->units;
     }
-    
+
+    public function getPricePerUnit(): float
+    {
+        return $this->pricePerUnit;
+    }
+
+    public function getPrice(): float
+    {
+        return $this->price;
+    }
+
+    public function getCurrency(): string
+    {
+        return $this->currency; 
+    }
 }

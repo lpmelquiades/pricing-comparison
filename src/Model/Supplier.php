@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PricingComparison\Model;
 
+//sera carregado pelo banco
 final class Supplier implements Buildable
 {
     use BuildMany;
@@ -21,19 +22,20 @@ final class Supplier implements Buildable
 
     private function sortMap(array $map) {
         foreach ($map as $key => $value) {
-            $map[$key] = $this->sortDesc($map[$key]);
+            $map[$key] = $this->sort($map[$key]);
         }
         return $map;
     }
 
-    private function sortDesc(array $offers) {
+    //sort by pricerPerUnit is the right way to find the cheapest supplier
+    private function sort(array $offers) {
         usort($offers,
             function (Offer $o, Offer $u): int
             {   
-                if ($o->getUnits() == $u->getUnits()) {
+                if ($o->getPricePerUnit() == $u->getPricePerUnit()) {
                     return 0;
                 }
-                return ($o->getUnits() < $u->getUnits()) ? 1 : -1;
+                return ($o->getPricePerUnit() < $u->getPricePerUnit()) ? -1 : 1;
             }
         );
 
@@ -42,9 +44,26 @@ final class Supplier implements Buildable
 
     public function calcCost(array $orderItems): Cost {
         $costItems = [];
-        foreach ($orderItems as $i) {
-            
+        foreach ($orderItems as $orderItem) {
+            array_push($costItems, ...$this->calcCostItems($orderItem));
         }
+        return new Cost($this->name, $costItems);
+    }
+
+    public function calcCostItems(OrderItem $orderItem): array {
+        $remainedUnits = $orderItem->getUnits();
+        $offers = $this->offers[$orderItem->getProduct()];
+        $costItems = [];
+        
+        for ($i = 0; $i <= count($offers) && $remainedUnits != 0; $i++) {
+            $r = $remainedUnits % $offers[$i]->getUnits();
+            $offerQuantity = ($remainedUnits-$r)/$offers[$i]->getUnits();
+            if ($offerQuantity > 0 ){
+                array_push($costItems, new CostItem($offers[$i], $offerQuantity));
+            }
+            $remainedUnits = $r;
+        }
+        return $costItems;
     }
 
     //isso aqui vai ir pra um handler

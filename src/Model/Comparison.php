@@ -11,6 +11,7 @@ final class Comparison implements Buildable
     private $orderItems;
     private $suppliers;
     private $costs;
+    private $result;
 
     private function __construct (
         array $orderItems,
@@ -18,8 +19,7 @@ final class Comparison implements Buildable
     ) {
         $this->orderItems = $orderItems;
         $this->suppliers = $suppliers;
-        // $this->costs = $this->calcCosts($orderItems, $suppliers);
-//        $this->result = $this->makeResult();
+        $this->calcResultSteps();
     }
 
     public static function build(array $entry)
@@ -30,14 +30,28 @@ final class Comparison implements Buildable
         );
     }
 
-    // private function calcCosts (
-    //     array $orderItems,
-    //     array $suppliers
-    // ): array {
-    //     $costs = [];
-    //     foreach ($suppliers as $supplier) {
-    //         array_push($costs, $supplier->calcCost($orderItems));
-    //     }
-    //     return $costs;
-    // }
+    private function calcResultSteps(){
+        $this->calcCosts();
+        $this->calcCheapest();
+    }
+
+    private function calcCosts() 
+    {
+        $this->costs = [];
+        foreach ($this->suppliers as $supplier) {
+            array_push($this->costs, $supplier->calcCost($this->orderItems));
+        }
+    }
+
+    private function calcCheapest()
+    {
+        $cheapest = $this->costs[0];
+        foreach ($this->costs as $cost) {
+            if ($cheapest->getTotalPrice() > $cost->getTotalPrice()) {
+                $cheapest = $cost;
+            }
+        }
+
+        $this->result = $cheapest->getResult();
+    } 
 }
