@@ -52,9 +52,9 @@ final class Offer implements Buildable, Mapable
         return $this->currency; 
     }
 
-    public function getProvision(int $orderUnits, int $offerUnits): OfferProvisionInterface
+    public function getProvision(int $orderUnits): OfferProvisionInterface
     {
-        return new OfferProvision($orderUnits, $offerUnits);
+        return new OfferProvision($orderUnits, $this->units);
     }
  
 }

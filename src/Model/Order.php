@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PricingComparison\Model;
 
-final class Comparison implements Buildable
+final class Order implements Buildable
 {
     use BuildMany;
 

@@ -39,7 +39,7 @@ final class CostCalc implements CostCalcInterface
         for ($i = 0; $i <= count($offers) && $remainedUnits != 0; $i++) {
             $offer = $offers[$i];
 
-            $provision = $offer->getProvision($remainedUnits, $offer->getUnits());
+            $provision = $offer->getProvision($remainedUnits);
         
             if ($provision->getQuantityNeeded() > 0){
                 array_push(

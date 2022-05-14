@@ -5,18 +5,17 @@ declare(strict_types=1);
 namespace PricingComparison\Tests;
 
 use PHPUnit\Framework\TestCase;
-use PricingComparison\Model\Comparison;
+use PricingComparison\Model\Order;
 use PricingComparison\Model\Result;
 
 class Example1Test extends TestCase 
 {
     public function testComparison()
     {
-        $c = Comparison::build([
+        $c = Order::build([
             'orderItems' => $this->getInputOrderData(),
             'suppliers' => DataProvider::getSuppliers()
         ]);
-
 
         $expectedResult = new Result('Supplier B', 102.0, 'EUR');
         $this->assertEquals($c->getResult(), $expectedResult);
