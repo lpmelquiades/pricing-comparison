@@ -4,9 +4,8 @@ declare(strict_types=1);
 
 namespace PricingComparison\Model\Offer;
 
-final class Provision implements ProvisionInterface
+final class UnitCalculation
 {
-
     private $orderUnits;
     private $offerUnits;
     private $quantityNeeded;
