@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace PricingComparison\Model;
 
 use PricingComparison\Model\Offer\Supplier;
-use PricingComparison\Model\Offer\CostBuilder;
-use PricingComparison\Model\Offer\CostBuilderInterface;
-use PricingComparison\Model\Offer\CostItemBuilder;
+use PricingComparison\Model\Cost\CostBuilder;
+use PricingComparison\Model\Cost\CostBuilderInterface;
+use PricingComparison\Model\Cost\CostItemBuilder;
 
 final class Order implements Buildable
 {

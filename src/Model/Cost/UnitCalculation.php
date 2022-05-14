@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PricingComparison\Model\Offer;
+namespace PricingComparison\Model\Cost;
 
 final class UnitCalculation
 {
