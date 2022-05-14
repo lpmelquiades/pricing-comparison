@@ -1,7 +1,8 @@
 {
     "autoload": {
         "psr-4": {
-            "PricingComparison\\" : "src/"
+            "PricingComparison\\" : "src/",
+            "PricingComparison\\Tests\\" : "tests/"
         }
     },
     "require-dev": {

@@ -1,5 +1,9 @@
 <?php
 
+declare(strict_types=1);
+
+namespace PricingComparison\Tests;
+
 use PHPUnit\Framework\TestCase;
 
 class DataProvider
@@ -7,8 +11,8 @@ class DataProvider
     public static function getSuppliers(): array
     {
         return [
-            self::getSupplierA(),
-            self::getSupplierB()
+            static::getSupplierA(),
+            static::getSupplierB()
         ];
     }
 
@@ -20,25 +24,25 @@ class DataProvider
                 [ 
                     'product' => 'Dental Floss', 
                     'units' => 1,
-                    'amount' => 9.00,
+                    'price' => 9.00,
                     'currency' => 'EUR'
                 ],
                 [ 
                     'product' => 'Dental Floss', 
                     'units' => 20,
-                    'amount' => 160.00,
+                    'price' => 160.00,
                     'currency' => 'EUR'
                 ],
                 [ 
                     'product' => 'Ibuprofen', 
                     'units' => 1,
-                    'amount' => 5.00,
+                    'price' => 5.00,
                     'currency' => 'EUR'
                 ],
                 [ 
                     'product' => 'Ibuprofen', 
                     'units' => 10,
-                    'amount' => 48.00,
+                    'price' => 48.00,
                     'currency' => 'EUR'
                 ]
             ]
@@ -53,31 +57,31 @@ class DataProvider
                 [ 
                     'product' => 'Dental Floss', 
                     'units' => 1,
-                    'amount' => 8.00,
+                    'price' => 8.00,
                     'currency' => 'EUR'
                 ],
                 [ 
                     'product' => 'Dental Floss', 
                     'units' => 10,
-                    'amount' => 71.00,
+                    'price' => 71.00,
                     'currency' => 'EUR'
                 ],
                 [ 
                     'product' => 'Ibuprofen', 
                     'units' => 1,
-                    'amount' => 6.00,
+                    'price' => 6.00,
                     'currency' => 'EUR'
                 ],
                 [ 
                     'product' => 'Ibuprofen', 
                     'units' => 5,
-                    'amount' => 25.00,
+                    'price' => 25.00,
                     'currency' => 'EUR'
                 ],
                 [ 
                     'product' => 'Ibuprofen', 
                     'units' => 100,
-                    'amount' => 410.00,
+                    'price' => 410.00,
                     'currency' => 'EUR'
                 ]
             ]

@@ -1,5 +1,9 @@
 <?php
 
+declare(strict_types=1);
+
+namespace PricingComparison\Tests;
+
 use PHPUnit\Framework\TestCase;
 use PricingComparison\Model\Comparison;
 
@@ -7,8 +11,14 @@ class Example1Test extends TestCase
 {
     public function testEmpty()
     {
-        $c = new Comparison();
-        $this->assertTrue($c->getX());
+        $c = Comparison::build([
+            'orderItems' => $this->getInputOrderData(),
+            'suppliers' => DataProvider::getSuppliers()
+        ]);
+
+        var_dump($c);
+
+        $this->assertTrue(false);
     }
 
     public function getInputOrderData(): array
