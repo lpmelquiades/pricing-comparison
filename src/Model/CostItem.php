@@ -2,11 +2,8 @@
 
 declare(strict_types=1);
 
-namespace PricingComparison\Model\Cost;
+namespace PricingComparison\Model;
 
-use PricingComparison\Model\Offer\Offer;
-
-//    5 x 1 Unit Dental Floss - 45 EUR
 final class CostItem
 {
     private $offer;

@@ -2,10 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PricingComparison\Model\Offer;
-
-use PricingComparison\Model\BuildMany;
-use PricingComparison\Model\Buildable;
+namespace PricingComparison\Model;
 
 //sera carregado pelo banco
 final class Supplier

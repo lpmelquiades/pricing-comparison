@@ -2,9 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PricingComparison\Model\Cost;
-
-use PricingComparison\Model\Offer\Supplier;
+namespace PricingComparison\Model;
 
 interface CostBuilderInterface
 {

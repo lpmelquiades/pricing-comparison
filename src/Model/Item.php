@@ -4,9 +4,6 @@ declare(strict_types=1);
 
 namespace PricingComparison\Model;
 
-use PricingComparison\Model\Buildable;
-use PricingComparison\Model\Build;
-
 final class Item implements Buildable
 {
     use Build;

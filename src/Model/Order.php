@@ -4,11 +4,6 @@ declare(strict_types=1);
 
 namespace PricingComparison\Model;
 
-use PricingComparison\Model\Offer\Supplier;
-use PricingComparison\Model\Cost\CostBuilder;
-use PricingComparison\Model\Cost\CostBuilderInterface;
-use PricingComparison\Model\Cost\CostItemBuilder;
-
 final class Order
 {
     use BuildMany;

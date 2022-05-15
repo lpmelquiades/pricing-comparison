@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace PricingComparison\Tests;
 
 use PHPUnit\Framework\TestCase;
-use PricingComparison\Model\Offer\Offer;
-use PricingComparison\Model\Offer\OfferDomainException;
+use PricingComparison\Model\Offer;
+use PricingComparison\Model\OfferDomainException;
 
 class OfferDomainExceptionTest extends TestCase 
 {

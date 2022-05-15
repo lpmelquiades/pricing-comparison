@@ -2,9 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PricingComparison\Model\Cost;
-
-use PricingComparison\Model\Result;
+namespace PricingComparison\Model;
 
 final class Cost
 {

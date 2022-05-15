@@ -2,10 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PricingComparison\Model\Offer;
-
-use PricingComparison\Model\Build;
-use PricingComparison\Model\Buildable;
+namespace PricingComparison\Model;
 
 final class Offer implements Buildable, Mapable
 {
