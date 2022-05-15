@@ -6,7 +6,6 @@ namespace PricingComparison\UseCases;
 
 use PricingComparison\Data\SupplierAdapter;
 use PricingComparison\Log\EchoAdapter;
-use PricingComparison\Log\Logger;
 use PricingComparison\Model\Order;
 use PricingComparison\Model\ResultMessage;
 use PricingComparison\Model\SupplierData;
@@ -17,11 +16,9 @@ final class CompareHandler
     private $logger;
 
     public function __construct(
-        SupplierData $supplierData,
-        Logger $logger
+        SupplierData $supplierData
     ){
         $this->supplierData = $supplierData;
-        $this->logger = $logger;
     }
 
     public function handle(Compare $compare): ResultMessage
@@ -39,8 +36,7 @@ final class CompareHandler
     public static function build(): self
     {
         return new static(
-            new SupplierAdapter(),
-            new EchoAdapter()
+            new SupplierAdapter()
         );
     }
 }
