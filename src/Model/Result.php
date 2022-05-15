@@ -24,4 +24,15 @@ final class Result
     {
         return $this->totalPrice;
     }
+
+    public function getSupplier(): string
+    {
+        return $this->supplier;
+    }
+
+    public function getCurrency(): string
+    {
+        return $this->currency;
+    }
+
 }

@@ -2,12 +2,10 @@
 
 declare(strict_types=1);
 
-namespace PricingComparison\Tests;
+namespace PricingComparison\Tests\Model;
 
 use PHPUnit\Framework\TestCase;
-use PricingComparison\Model\Supplier;
-use PricingComparison\Model\SupplierDomainException;
-use PricingComparison\Tests\DataProvider;
+
 
 class CostDomainExceptionTest extends TestCase 
 {

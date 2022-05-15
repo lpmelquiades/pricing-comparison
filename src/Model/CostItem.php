@@ -25,4 +25,9 @@ final class CostItem
     {
         return $this->totalPrice;
     }
+
+    public function getText(): string 
+    {
+        return $this->quantity . ' x '. $this->offer->getText();
+    }
 }

@@ -44,4 +44,22 @@ final class Cost
             $this->currency
         );
     }
+
+    public function getResultText(): string {
+        $text = 'Cost ' . $this->supplier . ":\n";
+        foreach ($this->costItems as $costItem) {
+            $text .= $costItem->getText() . "\n";
+        }
+        $text .= 'Total: ' . $this->totalPrice 
+        . ' ' .  $this->currency . "\n";
+        return $text;
+    }
 }
+
+/**
+ *     Cost Supplier A:
+ *     5 x 1 Unit Dental Floss - 45 EUR
+ *     1 x 10 Units Ibuprofen - 48 EUR
+ *     2 x 1 Unit Ibuprofen - 10 EUR
+ *     Total: 103 EUR
+ */

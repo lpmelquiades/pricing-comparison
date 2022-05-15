@@ -42,11 +42,7 @@ final class Supplier
 
     public static function build(string $supplier, array $offers)
     {
-        return new static(
-            $supplier,
-            static::buildMany(Offer::class, $offers),
-            new OfferMapBuilder()
-        );
+        return new static($supplier,$offers,new OfferMapBuilder());
     }
     
 }

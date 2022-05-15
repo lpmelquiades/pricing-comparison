@@ -2,9 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PricingComparison\Tests;
-
-use PHPUnit\Framework\TestCase;
+namespace PricingComparison\Tests\Model;
 
 class DataProvider
 {

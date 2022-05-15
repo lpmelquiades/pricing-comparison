@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PricingComparison\Model;
 
-final class Item implements Buildable
+final class OrderItem implements Buildable
 {
     use Build;
 
@@ -25,6 +25,12 @@ final class Item implements Buildable
 
     public function getUnits(): int {
         return $this->units;
+    }
+
+    public function getResultText(): string {
+        return $this->units
+        . ' ' . ($this->units === 1 ? 'Unit' : 'Units')
+        . ' ' . $this->product;
     }
 
 }

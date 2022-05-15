@@ -14,7 +14,7 @@ final class Offer implements Buildable, Mapable
     private $pricePerUnit;
     private $currency;
 
-    private function __construct (
+    public function __construct (
         string $product,
         int $units,
         float $price,
@@ -68,5 +68,14 @@ final class Offer implements Buildable, Mapable
     {
         return $this->currency; 
     }
- 
+
+    // 1 Unit Dental Floss - 40 EUR
+    public function getText(): string
+    {
+        return $this->units
+        . ' ' . ($this->units === 1 ? 'Unit' : 'Units') 
+        . ' ' . $this->product 
+        . ' - ' . $this->price . ' ' . $this->currency ;
+    }
+    
 }

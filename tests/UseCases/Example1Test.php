@@ -2,28 +2,27 @@
 
 declare(strict_types=1);
 
-namespace PricingComparison\Tests;
+namespace PricingComparison\Tests\UserCases;
 
 use PHPUnit\Framework\TestCase;
-use PricingComparison\Model\Order;
+use PricingComparison\UseCases\CompareAction;
 use PricingComparison\Model\Result;
 
 class Example1Test extends TestCase 
 {
-    public function testComparison()
+    public function testUseCase()
     {
-        $c = Order::build(
-            $this->getInputOrderData(),
-            DataProvider::getSuppliers()
+        $resultMessage = (new CompareAction())->make($this->getPayload());        
+        $this->assertEquals(
+            $resultMessage->getOrder(), 
+            $this->getExpectedOrderText()
         );
-
-        $expectedResult = new Result('Supplier B', 102.0, 'EUR');
-        $this->assertEquals($c->getResult(), $expectedResult);
     }
 
-    public function getInputOrderData(): array
+    public function getPayload(): array
     {
-        return [
+        return 
+        ['order' => [
             [
                 'product' => 'Dental Floss',
                 'units' => 5
@@ -32,11 +31,11 @@ class Example1Test extends TestCase
                 'product' => 'Ibuprofen',
                 'units' => 12
             ]    
-        ];
+        ]];
 
     }
 
-    public function getExpectedOrderLog(): string
+    public function getExpectedOrderText(): string
     {
         return "Customer wants to buy 5 Units Dental Floss and 12 Units Ibuprofen.";
     }
