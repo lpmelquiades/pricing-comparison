@@ -12,10 +12,10 @@ class Example1Test extends TestCase
 {
     public function testComparison()
     {
-        $c = Order::build([
-            'orderItems' => $this->getInputOrderData(),
-            'suppliers' => DataProvider::getSuppliers()
-        ]);
+        $c = Order::build(
+            $this->getInputOrderData(),
+            DataProvider::getSuppliers()
+        );
 
         $expectedResult = new Result('Supplier B', 102.0, 'EUR');
         $this->assertEquals($c->getResult(), $expectedResult);

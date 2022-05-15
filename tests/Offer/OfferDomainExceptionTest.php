@@ -10,10 +10,6 @@ use PricingComparison\Model\Offer\OfferDomainException;
 
 class OfferDomainExceptionTest extends TestCase 
 {
-    // string $product,
-    // int $units,
-    // float $price,
-    // string $currency notExpectException
 
     public function testDoNotThrowWhenValid()
     {

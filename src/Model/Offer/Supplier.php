@@ -8,7 +8,7 @@ use PricingComparison\Model\BuildMany;
 use PricingComparison\Model\Buildable;
 
 //sera carregado pelo banco
-final class Supplier implements Buildable
+final class Supplier
 {
     use BuildMany;
 
@@ -20,6 +20,15 @@ final class Supplier implements Buildable
         array $offers,
         OffersBuilder $offersBuilder
     ) { 
+        
+        if (strlen(trim($name)) < 1) {
+            throw new SupplierDomainException('supplier_invalid_name');
+        }
+        
+        if (count($offers) < 1) {
+            throw new SupplierDomainException('supplier_empty_offers');
+        }
+
         $this->name = $name;
         $this->offers = $offersBuilder->build($offers);
     }
@@ -34,12 +43,11 @@ final class Supplier implements Buildable
         return $this->offers;
     }
 
-    //isso aqui vai ir pra um handler
-    public static function build(array $entry)
+    public static function build(string $supplier, array $offers)
     {
         return new static(
-            $entry['supplier'],
-            static::buildMany(Offer::class, $entry['offers']),
+            $supplier,
+            static::buildMany(Offer::class, $offers),
             new OfferMapBuilder()
         );
     }

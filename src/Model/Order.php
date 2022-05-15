@@ -9,7 +9,7 @@ use PricingComparison\Model\Cost\CostBuilder;
 use PricingComparison\Model\Cost\CostBuilderInterface;
 use PricingComparison\Model\Cost\CostItemBuilder;
 
-final class Order implements Buildable
+final class Order
 {
     use BuildMany;
 
@@ -35,11 +35,18 @@ final class Order implements Buildable
         return $this->result;
     }
 
-    public static function build(array $entry)
+    public static function build(array $orderItems, array $suppliers)
     {
+        $suplierInstances = array_map(function ($entry) {
+            return Supplier::build(
+                $entry['supplier'], 
+                $entry['offers']
+            );
+        }, $suppliers);
+
         return new static(
-            static::buildMany(Item::class, $entry['orderItems']),
-            static::buildMany(Supplier::class, $entry['suppliers']),
+            static::buildMany(Item::class, $orderItems),
+            $suplierInstances,
             new CostBuilder()
         );
     }
