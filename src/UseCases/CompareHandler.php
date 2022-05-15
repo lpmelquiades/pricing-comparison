@@ -8,20 +8,19 @@ use PricingComparison\Data\SupplierAdapter;
 use PricingComparison\Log\EchoAdapter;
 use PricingComparison\Log\Logger;
 use PricingComparison\Model\Order;
-use PricingComparison\Model\Data;
 use PricingComparison\Model\ResultMessage;
 use PricingComparison\Model\SupplierData;
 
 final class CompareHandler
 {
-    private $suppliers;
+    private $supplierData;
     private $logger;
 
     public function __construct(
-        SupplierData $suppliers,
+        SupplierData $supplierData,
         Logger $logger
     ){
-        $this->suppliers = $suppliers;
+        $this->supplierData = $supplierData;
         $this->logger = $logger;
     }
 
@@ -29,7 +28,7 @@ final class CompareHandler
     {
         $o = Order::build(
             $compare->getOrderItems(),
-            $this->suppliers->pull($compare->getOrderItems())
+            $this->supplierData->pull($compare->getOrderItems())
         );
 
         $this->logger->log($o->getResultMessage()->getText());
