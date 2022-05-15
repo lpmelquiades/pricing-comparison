@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PricingComparison\Model;
 
-interface Data
+final class OrderDomainException extends \DomainException
 {
-    public function getSuppliers(): array;
+
 }

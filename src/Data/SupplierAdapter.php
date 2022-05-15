@@ -4,25 +4,25 @@ declare(strict_types=1);
 
 namespace PricingComparison\Data;
 
-use PricingComparison\Model\Data;
 use PricingComparison\Model\Supplier;
 use PricingComparison\Model\Offer;
+use PricingComparison\Model\SupplierData;
 
-final class SupplierAdapter implements Data
+final class SupplierAdapter implements SupplierData
 {
-    public function getSuppliers(): array 
-    {
-        return [$this->getSupplierA(), $this->getSupplierB()];
-    }
 
-    public function getSupplierA(): Supplier
+    public function pull(array $orderItems = []): array 
     {
-        return Supplier::build('Supplier A', $this->getOffersSupplierA());
-    }
-
-    public function getSupplierB(): Supplier
-    {
-        return Supplier::build('Supplier B', $this->getOffersSupplierB());
+        $a = $this->getSupplierA();
+        $b = $this->getSupplierB();
+        $suppliers = [];
+        if($a->hasOrderItems($orderItems)) {
+            $suppliers[] = $a;
+        }
+        if($b->hasOrderItems($orderItems)) {
+            $suppliers[] = $b;
+        }
+        return $suppliers;
     }
 
     public function getOffersSupplierA(): array
@@ -44,6 +44,16 @@ final class SupplierAdapter implements Data
             new Offer('Ibuprofen', 5, 25.00, 'EUR'),
             new Offer('Ibuprofen', 100, 410.00, 'EUR'),
         ]; 
+    }
+
+    public function getSupplierA(): Supplier
+    {
+        return Supplier::build('Supplier A', $this->getOffersSupplierA());
+    }
+
+    public function getSupplierB(): Supplier
+    {
+        return Supplier::build('Supplier B', $this->getOffersSupplierB());
     }
     
 }

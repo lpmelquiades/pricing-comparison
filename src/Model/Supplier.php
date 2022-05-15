@@ -30,6 +30,15 @@ final class Supplier
         $this->offers = $offersBuilder->build($offers);
     }
 
+    public function hasOrderItems($ordersItems) {
+        foreach($ordersItems as $i){
+            if(!isset($this->offers[$i->getProduct()])){
+                return false;
+            }            
+        }
+        return true;
+    }
+
     public function getName(): string
     {
         return $this->name;

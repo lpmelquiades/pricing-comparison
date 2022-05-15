@@ -20,6 +20,10 @@ final class Order
         array $suppliers,
         CostBuilderInterface $costBuilder
     ) {
+        if (count($suppliers) < 1) {
+            throw new OrderDomainException('order_empty_suppliers');
+        }
+
         $this->orderItems = $orderItems;
         $this->suppliers = $suppliers;
         $this->costBuilder = $costBuilder;

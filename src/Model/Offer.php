@@ -49,6 +49,11 @@ final class Offer implements Buildable, Mapable
         return $this->product;
     }
 
+    public function getProduct(): string
+    {
+        return $this->product;
+    }
+
     public function getUnits(): int
     {
         return $this->units;
