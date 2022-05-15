@@ -74,8 +74,7 @@ final class Offer implements Buildable, Mapable
     {
         return $this->units
         . ' ' . ($this->units === 1 ? 'Unit' : 'Units') 
-        . ' ' . $this->product 
-        . ' - ' . $this->price . ' ' . $this->currency ;
+        . ' ' . $this->product;
     }
     
 }

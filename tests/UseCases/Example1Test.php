@@ -17,6 +17,17 @@ class Example1Test extends TestCase
             $resultMessage->getOrder(), 
             $this->getExpectedOrderText()
         );
+
+        $this->assertEquals(
+            $resultMessage->getCosts(), 
+            $this->getExpectedCostSupplierAText() 
+            .  $this->getExpectedCostSupplierBText()
+        );
+
+        $this->assertEquals(
+            $resultMessage->getResult(),
+            $this->getExpectedResultText()
+        );
     }
 
     public function getPayload(): array
@@ -40,32 +51,29 @@ class Example1Test extends TestCase
         return "Customer wants to buy 5 Units Dental Floss and 12 Units Ibuprofen.";
     }
 
-    public function getExpectedCostSupplier1Log(): string
+    public function getExpectedCostSupplierAText(): string
     {
         return 
-        "
-        Cost Supplier A:\n
-        5 x 1 Unit Dental Floss - 45 EUR\n
-        1 x 10 Units Ibuprofen - 48 EUR\n
-        2 x 1 Unit Ibuprofen - 10 EUR\n
-        Total: 103 EUR
-        ";
+        'Cost Supplier A:' . "\n"
+        . '5 x 1 Unit Dental Floss - 45 EUR' . "\n"
+        . '1 x 10 Units Ibuprofen - 48 EUR' . "\n"
+        . '2 x 1 Unit Ibuprofen - 10 EUR' . "\n"
+        . 'Total: 103 EUR' . "\n\n"
+        ;
     }
 
 
-    public function getExpectedCostSupplier2Log(): string
+    public function getExpectedCostSupplierBText(): string
     {
         return 
-        "
-        Cost Supplier B:\n
-        5 x 1 Unit Dental Floss - 40 EUR\n
-        2 x 5 Units Ibuprofen - 50 EUR\n
-        2 x 1 Unit Ibuprofen - 12 EUR\n
-        Total: 102 EUR
-        ";
+        'Cost Supplier B:' . "\n"
+        . '5 x 1 Unit Dental Floss - 40 EUR' . "\n"
+        . '2 x 5 Units Ibuprofen - 50 EUR' . "\n"
+        . '2 x 1 Unit Ibuprofen - 12 EUR' . "\n"
+        . 'Total: 102 EUR' . "\n\n";
     }
 
-    public function getExpectedResultLog(): string
+    public function getExpectedResultText(): string
     {
         return "Result: Supplier B is cheaper - 102 EUR";
     }   

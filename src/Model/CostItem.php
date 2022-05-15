@@ -28,6 +28,7 @@ final class CostItem
 
     public function getText(): string 
     {
-        return $this->quantity . ' x '. $this->offer->getText();
+        return $this->quantity . ' x '. $this->offer->getText()
+        . ' - ' . $this->totalPrice . ' ' . $this->offer->getCurrency();
     }
 }
