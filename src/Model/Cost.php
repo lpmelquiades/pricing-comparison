@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PricingComparison\Model;
 
-final class Cost
+final class Cost implements \Ds\Hashable
 {
     private $supplier;
     private $costItems;
@@ -45,6 +45,33 @@ final class Cost
         $text .= 'Total: ' . $this->totalPrice 
         . ' ' .  $this->currency . "\n";
         return $text;
+    }
+
+    public function getSupplier(): string
+    {
+        return $this->supplier;
+    }
+
+    public function hash()
+    {
+        return $this->supplier;
+    }
+
+    public function equals($obj): bool
+    {
+        if (!is_object($obj)){
+            throw new \DomainException('invalid_object');
+        } 
+
+        if (get_class($obj) !== static::class){
+            throw new \DomainException('invalid_object');
+        } 
+
+        if ($obj->getSupplier() !== $this->supplier){
+            return false;
+        } 
+
+        return true;
     }
 }
 

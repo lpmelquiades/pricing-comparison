@@ -39,10 +39,14 @@ final class CostItem implements \Ds\Hashable
 
     public function equals($obj): bool
     {
-        if (is_object($obj) && get_class($obj) === static::class) {
-            return true;
-        }
+        if (!is_object($obj)){
+            throw new \DomainException('invalid_object');
+        } 
 
-        throw new \DomainException('cost_item_invalid_object');
+        if (get_class($obj) !== static::class){
+            throw new \DomainException('invalid_object');
+        } 
+
+        return true;
     }
 }

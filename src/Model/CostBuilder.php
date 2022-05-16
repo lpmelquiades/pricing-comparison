@@ -7,7 +7,7 @@ namespace PricingComparison\Model;
 final class CostBuilder implements CostBuilderInterface
 {
 
-    public function build(Supplier $supplier, array $orderItems): Cost {
+    public function build(Supplier $supplier, OrderItems $orderItems): Cost {
         // var_dump($supplier);
         // var_dump($orderItems);
         return new Cost(
@@ -16,10 +16,10 @@ final class CostBuilder implements CostBuilderInterface
         );
     }
 
-    private function buildCostItems(array $orderItems, array $offers): CostItems {
+    private function buildCostItems(OrderItems $orderItems, array $offers): CostItems {
         $costItems = [];
 
-        foreach ($orderItems as $orderItem) {
+        foreach ($orderItems->toArray() as $orderItem) {
             $offersByProduct = $offers[$orderItem->getProduct()];
             array_push(
                 $costItems, 

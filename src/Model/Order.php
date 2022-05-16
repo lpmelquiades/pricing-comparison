@@ -51,25 +51,20 @@ final class Order
 
     private function calcCosts() 
     {
-        $this->costs = [];
+        $costs = [];
         foreach ($this->suppliers->toArray() as $supplier) {
             $cost = $this->costBuilder->build(
-                $supplier, $this->orderItems->toArray()
+                $supplier, $this->orderItems
             );
-            $this->costs [] = $cost;
+            $costs [] = $cost;
         }
+
+        $this->costs = new Costs($costs);
     }
 
     private function calcCheapest()
     {
-        $cheapest = $this->costs[0];
-        foreach ($this->costs as $cost) {
-            if ($cheapest->getTotalPrice() > $cost->getTotalPrice()) {
-                $cheapest = $cost;
-            }
-        }
-
-        $this->result = $cheapest->getResult();
+        $this->result = $this->costs->calcCheapest()->getResult();
     } 
 
     private function makeResultMessage() {
@@ -98,11 +93,7 @@ final class Order
     }
 
     private function getCostsResultText(): array {
-        $costs = [];
-        foreach ($this->costs as $cost){
-            $costs[] = $cost->getResultText();
-        }
-        return $costs;
+        return $this->costs->getResultText();
     }
 
 }

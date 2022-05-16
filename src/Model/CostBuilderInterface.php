@@ -6,5 +6,5 @@ namespace PricingComparison\Model;
 
 interface CostBuilderInterface
 {
-    public function build(Supplier $supplier, array $orderItems): Cost;
+    public function build(Supplier $supplier, OrderItems $orderItems): Cost;
 }
