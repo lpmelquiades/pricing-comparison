@@ -14,7 +14,7 @@ use PricingComparison\Model\Suppliers;
 final class SupplierAdapter implements SupplierData
 {
 
-    public function pull(OrderItems $orderItems ): Suppliers 
+    public function pull(OrderItems $orderItems): Suppliers 
     {
         $a = $this->getSupplierA();
         $b = $this->getSupplierB();
@@ -25,12 +25,13 @@ final class SupplierAdapter implements SupplierData
         if($b->hasOrderItems($orderItems)) {
             $suppliers[] = $b;
         }
+
         return new Suppliers($suppliers);
     }
 
     public function getSupplierA(): Supplier
     {
-        return Supplier::build(
+        return new Supplier(
             'Supplier A', 
             new Offers($this->getOffersSupplierA())
         );
@@ -38,7 +39,7 @@ final class SupplierAdapter implements SupplierData
 
     public function getSupplierB(): Supplier
     {
-        return Supplier::build(
+        return new Supplier(
             'Supplier B', 
             new Offers($this->getOffersSupplierB())
         );

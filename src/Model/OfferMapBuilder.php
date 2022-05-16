@@ -8,7 +8,7 @@ final class OfferMapBuilder implements OffersBuilder
 {
 
     public function build(Offers $offers): array {
-        return $this->sortMap($this->buildMap($offers->toArray()));
+        return $offers->buildSortedMap();
     }
 
     private function sortMap(array $map) {
