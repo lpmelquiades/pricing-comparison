@@ -12,15 +12,15 @@ final class CostBuilder implements CostBuilderInterface
         // var_dump($orderItems);
         return new Cost(
             $supplier->getName(), 
-            $this->buildCostItems($orderItems, $supplier->getOffersMap())
+            $this->buildCostItems($orderItems, $supplier->getOffers())
         );
     }
 
-    private function buildCostItems(OrderItems $orderItems, array $offers): CostItems {
+    private function buildCostItems(OrderItems $orderItems, Offers $offers): CostItems {
         $costItems = [];
 
         foreach ($orderItems->toArray() as $orderItem) {
-            $offersByProduct = $offers[$orderItem->getProduct()];
+            $offersByProduct = $offers->getByProduct($orderItem->getProduct());
             array_push(
                 $costItems, 
                 ...$this->buildCostItem($orderItem->getUnits(), $offersByProduct)

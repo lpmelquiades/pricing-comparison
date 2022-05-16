@@ -9,7 +9,7 @@ final class Supplier implements \Ds\Hashable
     use BuildMany;
 
     private $name;
-    private $offersMap;
+    private $offers;
 
     public function __construct (
         string $name,
@@ -21,12 +21,13 @@ final class Supplier implements \Ds\Hashable
         }
 
         $this->name = $name;
-        $this->offersMap = $offers->buildSortedMap();
+        $this->offers = $offers;
     }
 
     public function hasOrderItems(OrderItems $ordersItems) {
+        var_dump($this);
         foreach($ordersItems->toArray() as $i){
-            if(!isset($this->offersMap[$i->getProduct()])){
+            if(!$this->offers->hasProduct($i->getProduct())){
                 return false;
             }            
         }
@@ -38,9 +39,9 @@ final class Supplier implements \Ds\Hashable
         return $this->name;
     }
 
-    public function getOffersMap(): array
+    public function getOffers(): Offers
     {
-        return $this->offersMap;
+        return $this->offers;
     }
     
     public function hash()

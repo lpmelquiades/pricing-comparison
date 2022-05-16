@@ -6,15 +6,24 @@ namespace PricingComparison\Model;
 
 final class Offers
 {
-
     private $set;
+    private $map;
 
     public function __construct(array $entries)
     {
         if(empty($entries)) {
             throw new \DomainException('empty_entries');
         }
-        $this->set = new \Ds\Set($entries);   
+        $this->set = new \Ds\Set($entries); 
+        $this->map = $this->buildSortedMap();  
+    }
+
+    public function getByProduct(string $product): array {
+        return $this->map[$product];
+    }
+
+    public function hasProduct(string $product): bool {
+        return isset($this->map[$product]);
     }
 
     public function isEmpty(): bool 
@@ -27,7 +36,7 @@ final class Offers
         return $this->set->toArray();
     }
 
-    public function buildMap(): array 
+    private function buildMap(): array 
     {
         $map = [];
         foreach ($this->set->toArray() as $i) {
@@ -40,7 +49,7 @@ final class Offers
         return $map;
     }
 
-    public function buildSortedMap(): array {
+    private function buildSortedMap(): array {
         $map = $this->buildMap();
         foreach ($map as $key => $value) {
             $map[$key] = $this->sort($map[$key]);
