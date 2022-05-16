@@ -35,5 +35,15 @@ final class OrderItems
         }
         return true;
     }
+
+    public function getResultText(): string {
+        $text = '';
+        foreach ($this->set->toArray() as $i) {
+            $text .= $i->getResultText() . ' and ';
+        } 
+        $text .= 'end';
+        $text = str_replace(' and end', '.', $text);
+        return 'Customer wants to buy ' . $text;
+    }
     
 }

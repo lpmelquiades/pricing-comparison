@@ -69,33 +69,11 @@ final class Order
 
     private function makeResultMessage() {
         $this->resultMessage = new ResultMessage(
-            $this->getOrderItemsResultText(),
-            $this->getResultText(),
-            $this->getCostsResultText()
+            $this->orderItems->getResultText(),
+            $this->result->getResultText(),
+            $this->costs->getResultText()
         );
     }
-
-    private function getOrderItemsResultText(): string {
-        $text = '';
-        foreach ($this->orderItems->toArray() as $i) {
-            $text .= $i->getResultText() . ' and ';
-        } 
-        $text .= 'end';
-        $text = str_replace(' and end', '.', $text);
-        return 'Customer wants to buy ' . $text;
-    }
-
-    private function getResultText(): string {
-        return 'Result: ' 
-        . $this->result->getSupplier() 
-        . ' is cheaper - ' . $this->result->getTotalPrice() 
-        . ' ' . $this->result->getCurrency(); 
-    }
-
-    private function getCostsResultText(): array {
-        return $this->costs->getResultText();
-    }
-
 }
 
 /**  
