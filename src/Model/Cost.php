@@ -13,22 +13,16 @@ final class Cost
 
     public function __construct (
         string $supplier,
-        array $costItems
+        CostItems $costItems
     ) {
         if (strlen(trim($supplier)) < 1) {
             throw new \DomainException('supplier_invalid_supplier');
         }
         
-        if (count($costItems) < 1) {
-            throw new \DomainException('supplier_empty_cost_items');
-        }
         $this->supplier = $supplier;
         $this->costItems = $costItems;
-        $this->currency = $costItems[0]->getCurrency();
-        $this->totalPrice = 0.0;
-        foreach ($costItems as $costItem) {
-            $this->totalPrice += $costItem->getTotalPrice();
-        }
+        $this->currency = $costItems->getCurrency();
+        $this->totalPrice = $costItems->getTotalPrice();
     }
     
     public function getTotalPrice(): float
@@ -47,9 +41,7 @@ final class Cost
 
     public function getResultText(): string {
         $text = 'Cost ' . $this->supplier . ":\n";
-        foreach ($this->costItems as $costItem) {
-            $text .= $costItem->getText() . "\n";
-        }
+        $text .= $this->costItems->getResultText();
         $text .= 'Total: ' . $this->totalPrice 
         . ' ' .  $this->currency . "\n";
         return $text;

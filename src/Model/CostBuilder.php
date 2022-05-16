@@ -16,7 +16,7 @@ final class CostBuilder implements CostBuilderInterface
         );
     }
 
-    private function buildCostItems(array $orderItems, array $offers): array {
+    private function buildCostItems(array $orderItems, array $offers): CostItems {
         $costItems = [];
 
         foreach ($orderItems as $orderItem) {
@@ -26,7 +26,7 @@ final class CostBuilder implements CostBuilderInterface
                 ...$this->buildCostItem($orderItem->getUnits(), $offersByProduct)
             );
         }
-        return $costItems;
+        return new CostItems($costItems);
     }
 
     private function buildCostItem(int $remainedUnits, array $offers): array {
