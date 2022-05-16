@@ -34,16 +34,13 @@ final class CostBuilder implements CostBuilderInterface
         for ($i = 0; $i <= count($offers) && $remainedUnits != 0; $i++) {
             $offer = $offers[$i];
 
-            $unitCalc = new UnitCalculation($remainedUnits, $offer->getUnits());
+            $costItemBuilder = new CostItemBuilder($remainedUnits, $offer);
         
-            if ($unitCalc->getQuantityNeeded() > 0) {
-                array_push(
-                    $costItems, 
-                    new CostItem($offer, $unitCalc->getQuantityNeeded())
-                );
+            if ($costItemBuilder->isBuildAllowed()) {
+                $costItems[] =  $costItemBuilder->build();
             }
         
-            $remainedUnits = $unitCalc->getRemainedUnits();
+            $remainedUnits = $costItemBuilder->getRemainedUnits();
         }
 
         return $costItems;

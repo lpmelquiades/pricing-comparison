@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PricingComparison\Model;
 
-final class UnitCalculationDomainException extends \DomainException
+final class CostItemBuilderDomainException extends \DomainException
 {
 
 }
