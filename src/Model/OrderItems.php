@@ -26,5 +26,14 @@ final class OrderItems
     {
         return $this->set->toArray();
     }
+
+    public function hasProducts(Offers $offers): bool {
+        foreach($this->set->toArray() as $i){
+            if(!$offers->hasProduct($i->getProduct())){
+                return false;
+            }            
+        }
+        return true;
+    }
     
 }

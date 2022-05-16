@@ -24,10 +24,6 @@ final class Supplier implements \Ds\Hashable
         $this->offers = $offers;
     }
 
-    public function hasOrderItems(OrderItems $ordersItems) {
-        return $this->offers->hasOrderItems($ordersItems);
-    }
-
     public function getName(): string
     {
         return $this->name;

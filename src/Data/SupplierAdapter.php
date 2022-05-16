@@ -18,11 +18,12 @@ final class SupplierAdapter implements SupplierData
     {
         $a = $this->getSupplierA();
         $b = $this->getSupplierB();
+
         $suppliers = [];
-        if($a->hasOrderItems($orderItems)) {
+        if($orderItems->hasProducts($a->getOffers())) {
             $suppliers[] = $a;
         }
-        if($b->hasOrderItems($orderItems)) {
+        if($orderItems->hasProducts($b->getOffers())) {
             $suppliers[] = $b;
         }
 
