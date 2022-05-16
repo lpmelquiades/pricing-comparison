@@ -48,11 +48,11 @@ final class OrderItem implements Buildable, \Ds\Hashable
             throw new \DomainException('invalid_object');
         } 
 
-        if ($obj->getProduct() === $this->product){
-            return true;
-        } 
+        if ($obj->hash() !== $this->hash()){
+            return false;
+        }
 
-        return false;
+        return true;
     }
 
 }

@@ -67,9 +67,9 @@ final class Cost implements \Ds\Hashable
             throw new \DomainException('invalid_object');
         } 
 
-        if ($obj->getSupplier() !== $this->supplier){
+        if ($obj->hash() !== $this->hash()){
             return false;
-        } 
+        }
 
         return true;
     }

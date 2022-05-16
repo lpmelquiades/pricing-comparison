@@ -7,8 +7,8 @@ namespace PricingComparison\Model;
 final class OfferMapBuilder implements OffersBuilder
 {
 
-    public function build(array $offers): array {
-        return $this->sortMap($this->buildMap($offers));
+    public function build(Offers $offers): array {
+        return $this->sortMap($this->buildMap($offers->toArray()));
     }
 
     private function sortMap(array $map) {

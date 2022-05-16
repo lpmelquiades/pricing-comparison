@@ -6,5 +6,5 @@ namespace PricingComparison\Model;
 
 interface OffersBuilder
 {
-    public function build(array $offers): array;
+    public function build(Offers $offers): array;
 }

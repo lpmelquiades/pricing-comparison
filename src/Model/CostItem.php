@@ -47,6 +47,10 @@ final class CostItem implements \Ds\Hashable
             throw new \DomainException('invalid_object');
         } 
 
+        if ($obj->hash() !== $this->hash()){
+            return false;
+        }
+
         return true;
     }
 }

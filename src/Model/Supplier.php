@@ -13,16 +13,12 @@ final class Supplier implements \Ds\Hashable
 
     private function __construct (
         string $name,
-        array $offers,
+        Offers $offers,
         OffersBuilder $offersBuilder
     ) { 
 
         if (strlen(trim($name)) < 1) {
             throw new \DomainException('supplier_invalid_name');
-        }
-        
-        if (count($offers) < 1) {
-            throw new \DomainException('supplier_empty_offers');
         }
 
         $this->name = $name;
@@ -48,9 +44,9 @@ final class Supplier implements \Ds\Hashable
         return $this->offers;
     }
 
-    public static function build(string $supplier, array $offers)
+    public static function build(string $supplier, Offers $offers)
     {
-        return new static($supplier,$offers,new OfferMapBuilder());
+        return new static($supplier, $offers,new OfferMapBuilder());
     }
     
     public function hash()
@@ -67,6 +63,10 @@ final class Supplier implements \Ds\Hashable
         if (get_class($obj) !== static::class){
             throw new \DomainException('invalid_object');
         } 
+
+        if ($obj->hash() !== $this->hash()){
+            return false;
+        }
 
         return true;
     }

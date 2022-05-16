@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PricingComparison\Model;
 
-final class Offer implements Buildable, Mapable
+final class Offer implements Buildable, Mapable, \Ds\Hashable
 {
     use Build;
 
@@ -80,6 +80,28 @@ final class Offer implements Buildable, Mapable
         return $this->units
         . ' ' . ($this->units === 1 ? 'Unit' : 'Units') 
         . ' ' . $this->product;
+    }
+
+    public function hash()
+    {
+        return $this->getText();
+    }
+
+    public function equals($obj): bool
+    {
+        if (!is_object($obj)){
+            throw new \DomainException('invalid_object');
+        } 
+
+        if (get_class($obj) !== static::class){
+            throw new \DomainException('invalid_object');
+        } 
+
+        if ($obj->hash() !== $this->hash()){
+            return false;
+        }
+
+        return true;
     }
     
 }

@@ -6,6 +6,7 @@ namespace PricingComparison\Data;
 
 use PricingComparison\Model\Supplier;
 use PricingComparison\Model\Offer;
+use PricingComparison\Model\Offers;
 use PricingComparison\Model\OrderItems;
 use PricingComparison\Model\SupplierData;
 use PricingComparison\Model\Suppliers;
@@ -29,12 +30,18 @@ final class SupplierAdapter implements SupplierData
 
     public function getSupplierA(): Supplier
     {
-        return Supplier::build('Supplier A', $this->getOffersSupplierA());
+        return Supplier::build(
+            'Supplier A', 
+            new Offers($this->getOffersSupplierA())
+        );
     }
 
     public function getSupplierB(): Supplier
     {
-        return Supplier::build('Supplier B', $this->getOffersSupplierB());
+        return Supplier::build(
+            'Supplier B', 
+            new Offers($this->getOffersSupplierB())
+        );
     }
 
     public function getOffersSupplierA(): array
