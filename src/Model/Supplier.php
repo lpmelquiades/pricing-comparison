@@ -29,8 +29,8 @@ final class Supplier implements \Ds\Hashable
         $this->offers = $offersBuilder->build($offers);
     }
 
-    public function hasOrderItems($ordersItems) {
-        foreach($ordersItems as $i){
+    public function hasOrderItems(OrderItems $ordersItems) {
+        foreach($ordersItems->toArray() as $i){
             if(!isset($this->offers[$i->getProduct()])){
                 return false;
             }            

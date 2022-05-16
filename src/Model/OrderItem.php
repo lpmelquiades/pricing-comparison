@@ -35,16 +35,24 @@ final class OrderItem implements Buildable, \Ds\Hashable
 
     public function hash()
     {
-        return $this->name;
+        return $this->product;
     }
 
     public function equals($obj): bool
     {
-        if (is_object($obj) && get_class($obj) === static::class) {
-            return true;
-        }
+        if (!is_object($obj)){
+            throw new \DomainException('invalid_object');
+        } 
 
-        throw new \DomainException('_invalid_object');
+        if (get_class($obj) !== static::class){
+            throw new \DomainException('invalid_object');
+        } 
+
+        if ($obj->getProduct() === $this->product){
+            return true;
+        } 
+
+        return false;
     }
 
 }

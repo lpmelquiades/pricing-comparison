@@ -6,6 +6,7 @@ namespace PricingComparison\UseCases;
 
 use PricingComparison\Model\BuildMany;
 use PricingComparison\Model\OrderItem;
+use PricingComparison\Model\OrderItems;
 
 final class Compare
 {
@@ -13,11 +14,11 @@ final class Compare
 
     private $orderItems;
 
-    public function __construct(array $payload) {
-        $this->orderItems = static::buildMany(OrderItem::class, $payload['order']);
+    public function __construct(OrderItems $orderItems) {
+        $this->orderItems = $orderItems;
     }
 
-    public function getOrderItems(): array
+    public function getOrderItems(): OrderItems
     {
         return $this->orderItems;
     }

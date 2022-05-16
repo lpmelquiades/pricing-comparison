@@ -6,13 +6,14 @@ namespace PricingComparison\Data;
 
 use PricingComparison\Model\Supplier;
 use PricingComparison\Model\Offer;
+use PricingComparison\Model\OrderItems;
 use PricingComparison\Model\SupplierData;
 use PricingComparison\Model\Suppliers;
 
 final class SupplierAdapter implements SupplierData
 {
 
-    public function pull(array $orderItems = []): Suppliers 
+    public function pull(OrderItems $orderItems ): Suppliers 
     {
         $a = $this->getSupplierA();
         $b = $this->getSupplierB();
@@ -24,6 +25,16 @@ final class SupplierAdapter implements SupplierData
             $suppliers[] = $b;
         }
         return new Suppliers($suppliers);
+    }
+
+    public function getSupplierA(): Supplier
+    {
+        return Supplier::build('Supplier A', $this->getOffersSupplierA());
+    }
+
+    public function getSupplierB(): Supplier
+    {
+        return Supplier::build('Supplier B', $this->getOffersSupplierB());
     }
 
     public function getOffersSupplierA(): array
@@ -45,16 +56,6 @@ final class SupplierAdapter implements SupplierData
             new Offer('Ibuprofen', 5, 25.00, 'EUR'),
             new Offer('Ibuprofen', 100, 410.00, 'EUR'),
         ]; 
-    }
-
-    public function getSupplierA(): Supplier
-    {
-        return Supplier::build('Supplier A', $this->getOffersSupplierA());
-    }
-
-    public function getSupplierB(): Supplier
-    {
-        return Supplier::build('Supplier B', $this->getOffersSupplierB());
     }
     
 }

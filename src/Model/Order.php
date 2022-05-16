@@ -53,10 +53,10 @@ final class Order
     {
         $this->costs = [];
         foreach ($this->suppliers->toArray() as $supplier) {
-            array_push(
-                $this->costs, 
-                $this->costBuilder->build($supplier, $this->orderItems->toArray())
+            $cost = $this->costBuilder->build(
+                $supplier, $this->orderItems->toArray()
             );
+            $this->costs [] = $cost;
         }
     }
 
@@ -82,7 +82,7 @@ final class Order
 
     private function getOrderItemsResultText(): string {
         $text = '';
-        foreach ($this->orderItems as $i) {
+        foreach ($this->orderItems->toArray() as $i) {
             $text .= $i->getResultText() . ' and ';
         } 
         $text .= 'end';

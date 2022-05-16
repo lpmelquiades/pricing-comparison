@@ -6,5 +6,5 @@ namespace PricingComparison\Model;
 
 interface SupplierData
 {
-    public function pull(array $orderItems): Suppliers;
+    public function pull(OrderItems $orderItems): Suppliers;
 }

@@ -8,6 +8,8 @@ final class CostBuilder implements CostBuilderInterface
 {
 
     public function build(Supplier $supplier, array $orderItems): Cost {
+        // var_dump($supplier);
+        // var_dump($orderItems);
         return new Cost(
             $supplier->getName(), 
             $this->buildCostItems($orderItems, $supplier->getOffers())
@@ -24,7 +26,6 @@ final class CostBuilder implements CostBuilderInterface
                 ...$this->buildCostItem($orderItem->getUnits(), $offersByProduct)
             );
         }
-        
         return $costItems;
     }
 

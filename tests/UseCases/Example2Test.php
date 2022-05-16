@@ -5,18 +5,19 @@ declare(strict_types=1);
 namespace PricingComparison\Tests\UserCases;
 
 use PHPUnit\Framework\TestCase;
-use PricingComparison\UseCases\CompareAction;
+use PricingComparison\Model\OrderItem;
+use PricingComparison\Model\OrderItems;
+use PricingComparison\UseCases\Compare;
+use PricingComparison\UseCases\CompareHandler;
 
 class Example2Test extends TestCase 
 {
 
     public function testUseCase()
     {
-        $resultMessage = (new CompareAction())->make($this->getPayload());        
-        $this->assertEquals(
-            $resultMessage->getOrder(), 
-            $this->getExpectedOrderText()
-        );
+        $resultMessage = CompareHandler::build()->handle(
+            new Compare($this->getOrderItems())
+        );        
 
         $this->assertEquals(
             $resultMessage->getCosts(), 
@@ -30,16 +31,9 @@ class Example2Test extends TestCase
         );
     }
 
-    public function getPayload(): array
+    public function getOrderItems(): OrderItems
     {
-        return 
-        ['order' => [
-            [
-                'product' => 'Ibuprofen',
-                'units' => 105
-            ]    
-        ]];
-
+        return new OrderItems([new OrderItem('Ibuprofen', 105)]);
     }
 
     public function getExpectedOrderText(): string
