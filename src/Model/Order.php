@@ -51,15 +51,10 @@ final class Order
 
     private function calcCosts() 
     {
-        $costs = [];
-        foreach ($this->suppliers->toArray() as $supplier) {
-            $cost = $this->costBuilder->build(
-                $supplier, $this->orderItems
-            );
-            $costs [] = $cost;
-        }
-
-        $this->costs = new Costs($costs);
+        $this->costs = $this->suppliers->calcCosts(
+            $this->costBuilder,
+            $this->orderItems
+        );
     }
 
     private function calcCheapest()

@@ -26,5 +26,18 @@ final class Suppliers
     {
         return $this->set->toArray();
     }
+
+    public function calcCosts(CostBuilder $costBuilder, $orderItems): Costs 
+    {
+        $costs = [];
+        foreach ($this->set->toArray() as $supplier) {
+            $cost = $costBuilder->build(
+                $supplier, $orderItems
+            );
+            $costs[] = $cost;
+        }
+
+        return new Costs($costs);
+    }
     
 }
