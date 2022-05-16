@@ -5,8 +5,7 @@ declare(strict_types=1);
 namespace PricingComparison\Tests\Model;
 
 use PHPUnit\Framework\TestCase;
-use PricingComparison\Model\Offer;
-use PricingComparison\Model\OfferDomainException;
+
 
 class OfferDomainExceptionTest extends TestCase 
 {
@@ -44,6 +43,7 @@ class OfferDomainExceptionTest extends TestCase
     //     $this->expectExceptionMessage('offer_invalid_price');
     //     Offer::build(['Toothbrush XYZ', 7, 0.0, 'EUR']);
     // }
+
     public function testX() {
         $this->assertTrue(true);
     }

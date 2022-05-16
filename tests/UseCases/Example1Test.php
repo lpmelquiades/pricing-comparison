@@ -6,10 +6,10 @@ namespace PricingComparison\Tests\UserCases;
 
 use PHPUnit\Framework\TestCase;
 use PricingComparison\UseCases\CompareAction;
-use PricingComparison\Model\Result;
 
 class Example1Test extends TestCase 
 {
+    
     public function testUseCase()
     {
         $resultMessage = (new CompareAction())->make($this->getPayload());        

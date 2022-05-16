@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace PricingComparison\Tests\Model;
 
 use PHPUnit\Framework\TestCase;
-use PricingComparison\Model\Supplier;
 use PricingComparison\Model\SupplierDomainException;
+use PricingComparison\Model\Supplier;
 
 class SupplierDomainExceptionTest extends TestCase 
 {
@@ -32,10 +32,6 @@ class SupplierDomainExceptionTest extends TestCase
         $this->expectException(SupplierDomainException::class);
         $this->expectExceptionMessage('supplier_empty_offers');
         Supplier::build('Supplier XYZ', []);
-    }
-
-    public function testX() {
-        $this->assertTrue(true);
     }
    
 }

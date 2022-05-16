@@ -5,11 +5,11 @@ declare(strict_types=1);
 namespace PricingComparison\Tests\UserCases;
 
 use PHPUnit\Framework\TestCase;
-use PricingComparison\Model\Result;
 use PricingComparison\UseCases\CompareAction;
 
 class Example2Test extends TestCase 
 {
+
     public function testUseCase()
     {
         $resultMessage = (new CompareAction())->make($this->getPayload());        

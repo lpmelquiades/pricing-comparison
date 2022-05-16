@@ -11,7 +11,7 @@ final class OrderItem implements Buildable
     private $product;
     private $units;
 
-    private function __construct (
+    public function __construct (
         string $product,
         int $units
     ) {
