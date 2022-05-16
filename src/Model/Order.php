@@ -17,19 +17,11 @@ final class Order
     private $resultMessage;
 
     private function __construct (
-        array $orderItems,
+        OrderItems $orderItems,
         Suppliers $suppliers,
         CostBuilderInterface $costBuilder
     ) {
         
-        if (count($orderItems) < 1) {
-            throw new \DomainException('order_empty_order_items');
-        }
-
-        if ($suppliers->isEmpty()) {
-            throw new OrderDomainException('order_empty_suppliers');
-        }
-
         $this->orderItems = $orderItems;
         $this->suppliers = $suppliers;
         $this->costBuilder = $costBuilder;
@@ -46,9 +38,9 @@ final class Order
         return $this->resultMessage;
     }
 
-    public static function build(array $orderItems, Suppliers $suppliers)
+    public static function build(OrderItems $orderItems, Suppliers $suppliers)
     {
-        return new static($orderItems,$suppliers, new CostBuilder());
+        return new static($orderItems, $suppliers, new CostBuilder());
     }
 
     private function calcResultSteps(){
@@ -63,7 +55,7 @@ final class Order
         foreach ($this->suppliers->toArray() as $supplier) {
             array_push(
                 $this->costs, 
-                $this->costBuilder->build($supplier, $this->orderItems)
+                $this->costBuilder->build($supplier, $this->orderItems->toArray())
             );
         }
     }

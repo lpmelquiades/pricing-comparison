@@ -4,33 +4,27 @@ declare(strict_types=1);
 
 namespace PricingComparison\Model;
 
-final class OrderItems implements Buildable, \Ds\Hashable
+final class OrderItems
 {
-    use Build;
 
-    private $product;
-    private $units;
+    private $set;
 
-    public function __construct (
-        string $product,
-        int $units
-    ) {
-        $this->product = $product;
-        $this->units = $units;
+    public function __construct(array $entries)
+    {
+        if(empty($entries)) {
+            throw new \DomainException('empty_entries');
+        }
+        $this->set = new \Ds\Set($entries);   
     }
 
-    public function getProduct(): string {
-        return $this->product;
+    public function isEmpty(): bool 
+    {
+        return $this->set->isEmpty();
     }
 
-    public function getUnits(): int {
-        return $this->units;
+    public function toArray(): array 
+    {
+        return $this->set->toArray();
     }
-
-    public function getResultText(): string {
-        return $this->units
-        . ' ' . ($this->units === 1 ? 'Unit' : 'Units')
-        . ' ' . $this->product;
-    }
-
+    
 }

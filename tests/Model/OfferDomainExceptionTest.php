@@ -6,7 +6,6 @@ namespace PricingComparison\Tests\Model;
 
 use PHPUnit\Framework\TestCase;
 use PricingComparison\Model\Offer;
-use PricingComparison\Model\OfferDomainException;
 
 class OfferDomainExceptionTest extends TestCase 
 {
