@@ -18,6 +18,15 @@ final class Offers
         $this->map = $this->buildSortedMap();  
     }
 
+    public function hasOrderItems(OrderItems $ordersItems): bool {
+        foreach($ordersItems->toArray() as $i){
+            if(!$this->hasProduct($i->getProduct())){
+                return false;
+            }            
+        }
+        return true;
+    }
+
     public function getByProduct(string $product): array {
         return $this->map[$product];
     }

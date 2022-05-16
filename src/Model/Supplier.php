@@ -25,13 +25,7 @@ final class Supplier implements \Ds\Hashable
     }
 
     public function hasOrderItems(OrderItems $ordersItems) {
-        var_dump($this);
-        foreach($ordersItems->toArray() as $i){
-            if(!$this->offers->hasProduct($i->getProduct())){
-                return false;
-            }            
-        }
-        return true;
+        return $this->offers->hasOrderItems($ordersItems);
     }
 
     public function getName(): string
