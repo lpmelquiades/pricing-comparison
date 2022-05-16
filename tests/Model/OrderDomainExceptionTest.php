@@ -5,11 +5,10 @@ declare(strict_types=1);
 namespace PricingComparison\Tests\Model;
 
 use PHPUnit\Framework\TestCase;
-use PricingComparison\Model\OrderDomainException;
 use PricingComparison\Model\Order;
 use PricingComparison\Model\OrderItem;
 
-class OrderDomainExceptionTest extends TestCase 
+class OrderTest extends TestCase 
 {
 
     public function testThrowWhenInvalidName()

@@ -5,10 +5,9 @@ declare(strict_types=1);
 namespace PricingComparison\Tests\Model;
 
 use PHPUnit\Framework\TestCase;
-use PricingComparison\Model\SupplierDomainException;
 use PricingComparison\Model\Supplier;
 
-class SupplierDomainExceptionTest extends TestCase 
+class SupplierTest extends TestCase 
 {
 
     public function testDoNotThrowWhenValid()
