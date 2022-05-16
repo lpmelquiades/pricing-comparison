@@ -29,8 +29,7 @@ Ibuprofen 5 Units 25,00 EUR
 Ibuprofen 100 Units 410,00 EUR
 
 Example 1
-Customer wants to buy 5 Units Dental Floss and 12 Units Ibuprofen.
-
+    Customer wants to buy 5 Units Dental Floss and 12 Units Ibuprofen.
     Cost Supplier A:
     5 x 1 Unit Dental Floss - 45 EUR
     1 x 10 Units Ibuprofen - 48 EUR
@@ -46,8 +45,7 @@ Customer wants to buy 5 Units Dental Floss and 12 Units Ibuprofen.
     Result: Supplier B is cheaper - 102 EUR
 
 Example 2
-Customer wants to buy 105 Units Ibuprofen
-
+    Customer wants to buy 105 Units Ibuprofen
     Cost Supplier A:
     10 x 10 Units Ibuprofen - 480 EUR
     5 x 1 Unit Ibuprofen - 25 EUR
