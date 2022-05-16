@@ -15,6 +15,8 @@ use hard coded values.
 
 6. Please implement the solution in PHP. You may use any framework.
 
+Suppliers
+
     Supplier A
     Dental Floss 1 Unit 9,00 EUR
     Dental Floss 20 Units 160,00 EUR
