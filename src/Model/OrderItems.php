@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PricingComparison\Model;
 
-final class OrderItem implements Buildable, \Ds\Hashable
+final class OrderItems implements Buildable, \Ds\Hashable
 {
     use Build;
 
@@ -31,20 +31,6 @@ final class OrderItem implements Buildable, \Ds\Hashable
         return $this->units
         . ' ' . ($this->units === 1 ? 'Unit' : 'Units')
         . ' ' . $this->product;
-    }
-
-    public function hash()
-    {
-        return $this->name;
-    }
-
-    public function equals($obj): bool
-    {
-        if (is_object($obj) && get_class($obj) === static::class) {
-            return true;
-        }
-
-        throw new \DomainException('_invalid_object');
     }
 
 }

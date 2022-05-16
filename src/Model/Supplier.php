@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PricingComparison\Model;
 
-final class Supplier
+final class Supplier implements \Ds\Hashable
 {
     use BuildMany;
 
@@ -16,7 +16,7 @@ final class Supplier
         array $offers,
         OffersBuilder $offersBuilder
     ) { 
-        
+
         if (strlen(trim($name)) < 1) {
             throw new \DomainException('supplier_invalid_name');
         }
@@ -53,4 +53,18 @@ final class Supplier
         return new static($supplier,$offers,new OfferMapBuilder());
     }
     
+    public function hash()
+    {
+        return $this->name;
+    }
+
+    public function equals($obj): bool
+    {
+        if (is_object($obj) && get_class($obj) === static::class) {
+            return true;
+        }
+
+        throw new \DomainException('supplier_invalid_object');
+    }
+
 }

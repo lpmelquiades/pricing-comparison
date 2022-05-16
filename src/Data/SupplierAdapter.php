@@ -7,11 +7,12 @@ namespace PricingComparison\Data;
 use PricingComparison\Model\Supplier;
 use PricingComparison\Model\Offer;
 use PricingComparison\Model\SupplierData;
+use PricingComparison\Model\Suppliers;
 
 final class SupplierAdapter implements SupplierData
 {
 
-    public function pull(array $orderItems = []): array 
+    public function pull(array $orderItems = []): Suppliers 
     {
         $a = $this->getSupplierA();
         $b = $this->getSupplierB();
@@ -22,7 +23,7 @@ final class SupplierAdapter implements SupplierData
         if($b->hasOrderItems($orderItems)) {
             $suppliers[] = $b;
         }
-        return $suppliers;
+        return new Suppliers($suppliers);
     }
 
     public function getOffersSupplierA(): array

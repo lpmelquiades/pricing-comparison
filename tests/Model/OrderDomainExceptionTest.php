@@ -8,6 +8,7 @@ use PHPUnit\Framework\TestCase;
 use PricingComparison\Model\OrderDomainException;
 use PricingComparison\Model\Order;
 use PricingComparison\Model\OrderItem;
+use PricingComparison\Model\Suppliers;
 
 class OrderDomainExceptionTest extends TestCase 
 {
@@ -16,14 +17,14 @@ class OrderDomainExceptionTest extends TestCase
     {
         $this->expectException(\DomainException::class);
         $this->expectExceptionMessage('order_empty_order_items');
-        Order::build([], [DataProvider::getOffersSupplierA()]);
+        Order::build([], DataProvider::getSuppliers());
     }
 
     public function testThrowWhenEmptyOffers()
     {
         $this->expectException(\DomainException::class);
         $this->expectExceptionMessage('order_empty_suppliers');
-        Order::build([new OrderItem('Toothbrush', 20)], []);
+        Order::build([new OrderItem('Toothbrush', 20)], new Suppliers([]));
     }
    
 }

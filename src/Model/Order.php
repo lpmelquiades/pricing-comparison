@@ -7,6 +7,7 @@ namespace PricingComparison\Model;
 final class Order
 {
     use BuildMany;
+    use OfSameClass;
 
     private $orderItems;
     private $suppliers;
@@ -17,15 +18,16 @@ final class Order
 
     private function __construct (
         array $orderItems,
-        array $suppliers,
+        Suppliers $suppliers,
         CostBuilderInterface $costBuilder
     ) {
+        
         if (count($orderItems) < 1) {
             throw new \DomainException('order_empty_order_items');
         }
 
-        if (count($suppliers) < 1) {
-            throw new \DomainException('order_empty_suppliers');
+        if ($suppliers->isEmpty()) {
+            throw new OrderDomainException('order_empty_suppliers');
         }
 
         $this->orderItems = $orderItems;
@@ -44,7 +46,7 @@ final class Order
         return $this->resultMessage;
     }
 
-    public static function build(array $orderItems, array $suppliers)
+    public static function build(array $orderItems, Suppliers $suppliers)
     {
         return new static($orderItems,$suppliers, new CostBuilder());
     }
@@ -58,7 +60,7 @@ final class Order
     private function calcCosts() 
     {
         $this->costs = [];
-        foreach ($this->suppliers as $supplier) {
+        foreach ($this->suppliers->toArray() as $supplier) {
             array_push(
                 $this->costs, 
                 $this->costBuilder->build($supplier, $this->orderItems)
