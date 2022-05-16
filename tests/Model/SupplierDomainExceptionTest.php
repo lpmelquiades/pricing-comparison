@@ -22,14 +22,14 @@ class SupplierDomainExceptionTest extends TestCase
 
     public function testThrowWhenInvalidName()
     {
-        $this->expectException(SupplierDomainException::class);
+        $this->expectException(\DomainException::class);
         $this->expectExceptionMessage('supplier_invalid_name');
         Supplier::build('    ', DataProvider::getOffersSupplierA());
     }
 
     public function testThrowWhenEmptyOffers()
     {
-        $this->expectException(SupplierDomainException::class);
+        $this->expectException(\DomainException::class);
         $this->expectExceptionMessage('supplier_empty_offers');
         Supplier::build('Supplier XYZ', []);
     }

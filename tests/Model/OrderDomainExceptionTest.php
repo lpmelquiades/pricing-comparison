@@ -14,14 +14,14 @@ class OrderDomainExceptionTest extends TestCase
 
     public function testThrowWhenInvalidName()
     {
-        $this->expectException(OrderDomainException::class);
+        $this->expectException(\DomainException::class);
         $this->expectExceptionMessage('order_empty_order_items');
         Order::build([], [DataProvider::getOffersSupplierA()]);
     }
 
     public function testThrowWhenEmptyOffers()
     {
-        $this->expectException(OrderDomainException::class);
+        $this->expectException(\DomainException::class);
         $this->expectExceptionMessage('order_empty_suppliers');
         Order::build([new OrderItem('Toothbrush', 20)], []);
     }

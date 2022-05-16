@@ -21,11 +21,11 @@ final class Order
         CostBuilderInterface $costBuilder
     ) {
         if (count($orderItems) < 1) {
-            throw new OrderDomainException('order_empty_order_items');
+            throw new \DomainException('order_empty_order_items');
         }
 
         if (count($suppliers) < 1) {
-            throw new OrderDomainException('order_empty_suppliers');
+            throw new \DomainException('order_empty_suppliers');
         }
 
         $this->orderItems = $orderItems;

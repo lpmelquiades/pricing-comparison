@@ -18,11 +18,11 @@ final class Supplier
     ) { 
         
         if (strlen(trim($name)) < 1) {
-            throw new SupplierDomainException('supplier_invalid_name');
+            throw new \DomainException('supplier_invalid_name');
         }
         
         if (count($offers) < 1) {
-            throw new SupplierDomainException('supplier_empty_offers');
+            throw new \DomainException('supplier_empty_offers');
         }
 
         $this->name = $name;

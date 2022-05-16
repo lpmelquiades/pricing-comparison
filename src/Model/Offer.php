@@ -22,19 +22,19 @@ final class Offer implements Buildable, Mapable
     ) {
 
         if (strlen(trim($product)) < 1) {
-            throw new OfferDomainException('offer_invalid_product');
+            throw new \DomainException('offer_invalid_product');
         }
 
         if (strlen(trim($currency)) !== 3) {
-            throw new OfferDomainException('offer_invalid_currency');            
+            throw new \DomainException('offer_invalid_currency');            
         }
 
         if ($units < 1) {
-            throw new OfferDomainException('offer_invalid_units');
+            throw new \DomainException('offer_invalid_units');
         }
 
         if ($price <= 0.0) {
-            throw new OfferDomainException('offer_invalid_price');
+            throw new \DomainException('offer_invalid_price');
         }
 
         $this->product = $product;

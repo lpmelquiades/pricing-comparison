@@ -18,7 +18,7 @@ final class CostItemBuilder
     ) {
 
         if ($orderUnits < 1) {
-            throw new CostItemBuilderDomainException(
+            throw new \DomainException(
                 'cost_item_builder_invalid_order_units'
             );
         }
@@ -59,7 +59,7 @@ final class CostItemBuilder
             return new CostItem($this->offer, $this->getQuantityNeeded());
         }
 
-        throw new CostItemBuilderDomainException(
+        throw new \DomainException(
             'cost_item_builder_build_not_allowed'
         );
     }

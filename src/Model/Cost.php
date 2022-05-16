@@ -16,11 +16,11 @@ final class Cost
         array $costItems
     ) {
         if (strlen(trim($supplier)) < 1) {
-            throw new CostDomainException('supplier_invalid_supplier');
+            throw new \DomainException('supplier_invalid_supplier');
         }
         
         if (count($costItems) < 1) {
-            throw new CostDomainException('supplier_empty_cost_items');
+            throw new \DomainException('supplier_empty_cost_items');
         }
         $this->supplier = $supplier;
         $this->costItems = $costItems;
