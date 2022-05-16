@@ -4,85 +4,40 @@ declare(strict_types=1);
 
 namespace PricingComparison\Tests\Model;
 
+use PricingComparison\Model\Offer;
+use PricingComparison\Model\Supplier;
+
 class DataProvider
 {
-    public static function getSuppliers(): array
+    public static function getOffersSupplierA(): array
     {
         return [
-            static::getSupplierA(),
-            static::getSupplierB()
-        ];
+            new Offer('Dental Floss', 1, 9.00, 'EUR'),
+            new Offer('Dental Floss', 20, 160.00, 'EUR'),
+            new Offer('Ibuprofen', 1, 5.00, 'EUR'),
+            new Offer('Ibuprofen', 10, 48.00, 'EUR'),
+        ]; 
     }
 
-    public static function getSupplierA(): array
+    public static function getOffersSupplierB(): array
     {
         return [
-            'supplier' => 'Supplier A',
-            'offers' => [
-                [ 
-                    'product' => 'Dental Floss', 
-                    'units' => 1,
-                    'price' => 9.00,
-                    'currency' => 'EUR'
-                ],
-                [ 
-                    'product' => 'Dental Floss', 
-                    'units' => 20,
-                    'price' => 160.00,
-                    'currency' => 'EUR'
-                ],
-                [ 
-                    'product' => 'Ibuprofen', 
-                    'units' => 1,
-                    'price' => 5.00,
-                    'currency' => 'EUR'
-                ],
-                [ 
-                    'product' => 'Ibuprofen', 
-                    'units' => 10,
-                    'price' => 48.00,
-                    'currency' => 'EUR'
-                ]
-            ]
-        ];
+            new Offer('Dental Floss', 1, 8.00, 'EUR'),
+            new Offer('Dental Floss', 10, 71.00, 'EUR'),
+            new Offer('Ibuprofen', 1, 6.00, 'EUR'),
+            new Offer('Ibuprofen', 5, 25.00, 'EUR'),
+            new Offer('Ibuprofen', 100, 410.00, 'EUR'),
+        ]; 
     }
 
-    public static function getSupplierB(): array
+    public static function getSupplierA(): Supplier
     {
-        return [
-            'supplier' => 'Supplier B',
-            'offers' => [
-                [ 
-                    'product' => 'Dental Floss', 
-                    'units' => 1,
-                    'price' => 8.00,
-                    'currency' => 'EUR'
-                ],
-                [ 
-                    'product' => 'Dental Floss', 
-                    'units' => 10,
-                    'price' => 71.00,
-                    'currency' => 'EUR'
-                ],
-                [ 
-                    'product' => 'Ibuprofen', 
-                    'units' => 1,
-                    'price' => 6.00,
-                    'currency' => 'EUR'
-                ],
-                [ 
-                    'product' => 'Ibuprofen', 
-                    'units' => 5,
-                    'price' => 25.00,
-                    'currency' => 'EUR'
-                ],
-                [ 
-                    'product' => 'Ibuprofen', 
-                    'units' => 100,
-                    'price' => 410.00,
-                    'currency' => 'EUR'
-                ]
-            ]
-        ];
+        return Supplier::build('Supplier A', static::getOffersSupplierA());
     }
+
+    public static function getSupplierB(): Supplier
+    {
+        return Supplier::build('Supplier B', static::getOffersSupplierB());
+    }
+
 }
