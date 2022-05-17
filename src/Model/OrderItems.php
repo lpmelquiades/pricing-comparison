@@ -45,5 +45,32 @@ final class OrderItems
         $text = str_replace(' and end', '.', $text);
         return 'Customer wants to buy ' . $text;
     }
+
+    public function getCostItemBuilders(Offers $offers): CostItemBuilders {
+        $builders = [];
+        foreach ($this->set->toArray() as $orderItem) {
+            $offersByProduct = $offers->getByProduct($orderItem->getProduct());
+            $builders[] = $this->getCostItemBuildersByUnits(
+                $orderItem->getUnits(), 
+                $offersByProduct
+            );
+        }
+        return new CostItemBuilders($builders);
+    }
+
+
+    private function getCostItemBuildersByUnits(
+        int $remainedUnits, 
+        array $offers
+    ): array {
+        $builders = [];
+        for ($i = 0; $i <= count($offers) && $remainedUnits != 0; $i++) {
+            $offer = $offers[$i];
+            $builder = new CostItemBuilder($remainedUnits, $offer);
+            $builders[] = $builder;
+            $remainedUnits = $builder->getRemainedUnits();
+        }
+        return $builders;
+    }   
     
 }

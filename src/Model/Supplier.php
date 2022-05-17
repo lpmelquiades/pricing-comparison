@@ -6,7 +6,6 @@ namespace PricingComparison\Model;
 
 final class Supplier implements \Ds\Hashable
 {
-    use BuildMany;
 
     private $name;
     private $offers;

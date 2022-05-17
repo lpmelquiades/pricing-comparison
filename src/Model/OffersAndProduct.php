@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PricingComparison\Model;
 
-final class OffersByProduct
+final class OffersAndProduct
 {
     private $offers;
     private $product;

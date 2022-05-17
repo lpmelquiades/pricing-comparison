@@ -4,10 +4,8 @@ declare(strict_types=1);
 
 namespace PricingComparison\Model;
 
-final class Offer implements Buildable, Mapable, \Ds\Hashable
+final class Offer implements Mapable, \Ds\Hashable
 {
-    use Build;
-
     private $product;
     private $units;
     private $price;

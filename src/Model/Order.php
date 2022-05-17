@@ -6,8 +6,6 @@ namespace PricingComparison\Model;
 
 final class Order
 {
-    use BuildMany;
-
     private $orderItems;
     private $suppliers;
     private $costs;

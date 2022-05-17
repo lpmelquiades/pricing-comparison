@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PricingComparison\Model;
 
 
-final class CostItemBuilder
+final class CostItemBuilder implements \Ds\Hashable
 {
     private $orderUnits;
     private $offer;
@@ -62,6 +62,28 @@ final class CostItemBuilder
         throw new \DomainException(
             'cost_item_builder_build_not_allowed'
         );
+    }
+
+    public function hash()
+    {
+        return $this->supplier;
+    }
+
+    public function equals($obj): bool
+    {
+        if (!is_object($obj)){
+            throw new \DomainException('invalid_object');
+        } 
+
+        if (get_class($obj) !== static::class){
+            throw new \DomainException('invalid_object');
+        } 
+
+        if ($obj->hash() !== $this->hash()){
+            return false;
+        }
+
+        return true;
     }
 
 }

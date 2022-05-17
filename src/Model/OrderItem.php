@@ -4,10 +4,8 @@ declare(strict_types=1);
 
 namespace PricingComparison\Model;
 
-final class OrderItem implements Buildable, \Ds\Hashable
+final class OrderItem implements \Ds\Hashable
 {
-    use Build;
-
     private $product;
     private $units;
 
