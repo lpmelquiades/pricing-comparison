@@ -10,10 +10,8 @@ final class CostBuilder implements CostBuilderInterface
     public function build(Supplier $supplier, OrderItems $orderItems): Cost {
         // var_dump($supplier);
         // var_dump($orderItems);
-        return new Cost(
-            $supplier->getName(),
-            $this->buildCostItems($orderItems, $supplier->getOffers())
-        );
+        $builders = $orderItems->getCostItemBuilders($supplier->getOffers());
+        return new Cost($supplier->getName(), $builders->build());
     }
 
     private function buildCostItems(OrderItems $orderItems, Offers $offers): CostItems {

@@ -48,14 +48,14 @@ final class CostItemBuilder implements \Ds\Hashable
         return $this->remainedUnits;
     }
 
-    public function isBuildAllowed(): bool 
+    public function isAllowed(): bool 
     {
         return $this->quantityNeeded > 0;
     }
 
     public function build(): CostItem
     {
-        if($this->isBuildAllowed()){
+        if($this->isAllowed()){
             return new CostItem($this->offer, $this->getQuantityNeeded());
         }
 
@@ -66,7 +66,10 @@ final class CostItemBuilder implements \Ds\Hashable
 
     public function hash()
     {
-        return $this->supplier;
+        return $this->orderUnits 
+        . ' ' . $this->offer->getText()
+        . ' ' . $this->quantityNeeded
+        . ' ' . $this->remainedUnits;
     }
 
     public function equals($obj): bool

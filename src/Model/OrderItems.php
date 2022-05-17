@@ -50,16 +50,17 @@ final class OrderItems
         $builders = [];
         foreach ($this->set->toArray() as $orderItem) {
             $offersByProduct = $offers->getByProduct($orderItem->getProduct());
-            $builders[] = $this->getCostItemBuildersByUnits(
+            $buildersByShare = $this->getCostItemBuildersByShare(
                 $orderItem->getUnits(), 
                 $offersByProduct
             );
+            array_push($builders, ...$buildersByShare);
         }
         return new CostItemBuilders($builders);
     }
 
 
-    private function getCostItemBuildersByUnits(
+    private function getCostItemBuildersByShare(
         int $remainedUnits, 
         array $offers
     ): array {
