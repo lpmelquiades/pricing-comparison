@@ -23,22 +23,13 @@ final class Offers
         $this->map = $this->buildSortedMap();  
     }
 
+    //TODO: rework??
     public function getByProduct(string $product): array {
         return $this->map[$product];
     }
 
     public function hasProduct(string $product): bool {
         return isset($this->map[$product]);
-    }
-
-    public function isEmpty(): bool 
-    {
-        return $this->set->isEmpty();
-    }
-
-    public function toArray(): array 
-    {
-        return $this->set->toArray();
     }
 
     private function buildMap(): array 

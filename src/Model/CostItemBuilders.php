@@ -30,7 +30,6 @@ final class CostItemBuilders
             }
         }
         return new CostItems($costItems);
-
     }
 
 }

@@ -72,7 +72,6 @@ final class Offer implements Mapable, \Ds\Hashable
         return $this->currency; 
     }
 
-    // 1 Unit Dental Floss - 40 EUR
     public function getText(): string
     {
         return $this->units

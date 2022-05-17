@@ -21,16 +21,6 @@ final class OrderItems
         $this->set = new \Ds\Set($entries);    
     }
 
-    public function isEmpty(): bool 
-    {
-        return $this->set->isEmpty();
-    }
-
-    public function toArray(): array 
-    {
-        return $this->set->toArray();
-    }
-
     public function hasProducts(Offers $offers): bool {
         foreach($this->set->toArray() as $i){
             if(!$offers->hasProduct($i->getProduct())){

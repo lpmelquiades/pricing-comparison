@@ -4,33 +4,12 @@ declare(strict_types=1);
 
 namespace PricingComparison\Model;
 
-final class Suppliers
+final class Suppliers extends Set implements SetInterface 
 {
-    private $set;
-
-    public function __construct(array $entries)
-    {
-        if(empty($entries)) {
-            throw new \InvalidArgumentException('empty_entries');
-        }
-
-        if(get_class($entries[0]) !== Supplier::class) {
-            throw new \InvalidArgumentException('not_same_class_entries');
-        }
-
-        $this->set = new \Ds\Set($entries);   
+    public function getEntryClass() {
+        return Supplier::class;
     }
-
-    public function isEmpty(): bool 
-    {
-        return $this->set->isEmpty();
-    }
-
-    public function toArray(): array 
-    {
-        return $this->set->toArray();
-    }
-
+ 
     public function calcCosts(OrderItems $orderItems): Costs 
     {
         $costs = [];
@@ -41,6 +20,5 @@ final class Suppliers
         }
 
         return new Costs($costs);
-    }
-    
+    }   
 }

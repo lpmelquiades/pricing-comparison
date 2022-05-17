@@ -21,12 +21,6 @@ final class Costs
         $this->set = new \Ds\Set($entries);   
     }
 
-
-    public function isEmpty(): bool 
-    {
-        return $this->set->isEmpty();
-    }
-
     public function getResultText(): array {
         $costs = [];
         foreach ($this->set->toArray() as $cost){

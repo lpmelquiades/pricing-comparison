@@ -21,16 +21,6 @@ final class CostItems
         $this->set = new \Ds\Set($entries);   
     }
 
-    public function isEmpty(): bool 
-    {
-        return $this->set->isEmpty();
-    }
-
-    public function toArray(): array 
-    {
-        return $this->set->toArray();
-    }
-
     public function getCurrency(): string
     {
         return $this->set->get(0)->getCurrency();
