@@ -16,7 +16,7 @@ final class Supplier implements \Ds\Hashable
     ) { 
 
         if (strlen(trim($name)) < 1) {
-            throw new \DomainException('supplier_invalid_name');
+            throw new \InvalidArgumentException('not_same_class_entries');
         }
 
         $this->name = $name;

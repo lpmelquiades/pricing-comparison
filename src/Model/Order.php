@@ -10,7 +10,6 @@ final class Order
     private $suppliers;
     private $costs;
     private $result;
-    private $costBuilder;
     private $resultMessage;
 
     private function __construct (

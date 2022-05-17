@@ -6,14 +6,18 @@ namespace PricingComparison\Model;
 
 final class CostItems
 {
-
     private $set;
 
     public function __construct(array $entries)
     {
         if(empty($entries)) {
-            throw new \DomainException('empty_entries');
+            throw new \InvalidArgumentException('empty_entries');
         }
+
+        if(get_class($entries[0]) !== CostItem::class) {
+            throw new \InvalidArgumentException('not_same_class_entries');
+        }
+
         $this->set = new \Ds\Set($entries);   
     }
 
