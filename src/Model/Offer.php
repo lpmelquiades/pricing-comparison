@@ -4,10 +4,8 @@ declare(strict_types=1);
 
 namespace PricingComparison\Model;
 
-final class Offer implements Buildable, Mapable
+final class Offer implements Mapable, \Ds\Hashable
 {
-    use Build;
-
     private $product;
     private $units;
     private $price;
@@ -22,19 +20,19 @@ final class Offer implements Buildable, Mapable
     ) {
 
         if (strlen(trim($product)) < 1) {
-            throw new \DomainException('offer_invalid_product');
+            throw new \InvalidArgumentException('invalid_product');
         }
 
         if (strlen(trim($currency)) !== 3) {
-            throw new \DomainException('offer_invalid_currency');            
+            throw new \InvalidArgumentException('invalid_currency');            
         }
 
         if ($units < 1) {
-            throw new \DomainException('offer_invalid_units');
+            throw new \InvalidArgumentException('invalid_units');
         }
 
         if ($price <= 0.0) {
-            throw new \DomainException('offer_invalid_price');
+            throw new \InvalidArgumentException('invalid_price');
         }
 
         $this->product = $product;
@@ -74,12 +72,33 @@ final class Offer implements Buildable, Mapable
         return $this->currency; 
     }
 
-    // 1 Unit Dental Floss - 40 EUR
     public function getText(): string
     {
         return $this->units
         . ' ' . ($this->units === 1 ? 'Unit' : 'Units') 
         . ' ' . $this->product;
+    }
+
+    public function hash()
+    {
+        return $this->getText();
+    }
+
+    public function equals($obj): bool
+    {
+        if (!is_object($obj)){
+            throw new \InvalidArgumentException('invalid_object');
+        } 
+
+        if (get_class($obj) !== static::class){
+            throw new \InvalidArgumentException('invalid_class');
+        } 
+
+        if ($obj->hash() !== $this->hash()){
+            return false;
+        }
+
+        return true;
     }
     
 }

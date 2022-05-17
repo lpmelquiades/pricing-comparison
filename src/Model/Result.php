@@ -35,4 +35,10 @@ final class Result
         return $this->currency;
     }
 
+    public function getResultText(): string {
+        return 'Result: ' . $this->supplier
+        . ' is cheaper - ' . $this->totalPrice 
+        . ' ' . $this->currency; 
+    }
+
 }

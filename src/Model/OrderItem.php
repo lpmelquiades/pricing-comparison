@@ -4,10 +4,8 @@ declare(strict_types=1);
 
 namespace PricingComparison\Model;
 
-final class OrderItem implements Buildable
+final class OrderItem implements \Ds\Hashable
 {
-    use Build;
-
     private $product;
     private $units;
 
@@ -15,6 +13,12 @@ final class OrderItem implements Buildable
         string $product,
         int $units
     ) {
+        if (strlen(trim($product)) < 1) {
+            throw new \InvalidArgumentException('invalid_product');
+        }
+        if ($units < 1) {
+            throw new \InvalidArgumentException('invalid_units');
+        }
         $this->product = $product;
         $this->units = $units;
     }
@@ -31,6 +35,28 @@ final class OrderItem implements Buildable
         return $this->units
         . ' ' . ($this->units === 1 ? 'Unit' : 'Units')
         . ' ' . $this->product;
+    }
+
+    public function hash()
+    {
+        return $this->product;
+    }
+
+    public function equals($obj): bool
+    {
+        if (!is_object($obj)){
+            throw new \InvalidArgumentException('invalid_object');
+        } 
+
+        if (get_class($obj) !== static::class){
+            throw new \InvalidArgumentException('invalid_class');
+        } 
+
+        if ($obj->hash() !== $this->hash()){
+            return false;
+        }
+
+        return true;
     }
 
 }

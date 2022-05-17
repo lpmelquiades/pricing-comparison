@@ -6,9 +6,17 @@ namespace PricingComparison\Tests\Model;
 
 use PricingComparison\Model\Offer;
 use PricingComparison\Model\Supplier;
+use PricingComparison\Model\Suppliers;
 
 class DataProvider
 {
+    public static function getSuppliers(): Suppliers
+    {
+        return new Suppliers(
+            [static::getSupplierA(), static::getOffersSupplierB()]
+        );
+    }
+ 
     public static function getOffersSupplierA(): array
     {
         return [
