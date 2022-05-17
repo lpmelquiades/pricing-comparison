@@ -4,21 +4,10 @@ declare(strict_types=1);
 
 namespace PricingComparison\Model;
 
-final class OrderItems
+final class OrderItems extends Set implements SetInterface 
 {
-    private $set;
-
-    public function __construct(array $entries)
-    {
-        if(empty($entries)) {
-            throw new \InvalidArgumentException('empty_entries');
-        }
-
-        if(get_class($entries[0]) !== OrderItem::class) {
-            throw new \InvalidArgumentException('not_same_class_entries');
-        }
-
-        $this->set = new \Ds\Set($entries);    
+    public function getEntryClass() {
+        return OrderItem::class;
     }
 
     public function hasProducts(Offers $offers): bool {

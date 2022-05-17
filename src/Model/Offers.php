@@ -4,22 +4,17 @@ declare(strict_types=1);
 
 namespace PricingComparison\Model;
 
-final class Offers
+final class Offers extends Set implements SetInterface 
 {
-    private $set;
+    public function getEntryClass() {
+        return Offer::class;
+    }
+
     private $map;
 
     public function __construct(array $entries)
     {
-        if(empty($entries)) {
-            throw new \InvalidArgumentException('empty_entries');
-        }
-
-        if(get_class($entries[0]) !== Offer::class) {
-            throw new \InvalidArgumentException('not_same_class_entries');
-        }
-
-        $this->set = new \Ds\Set($entries);  
+        parent::__construct($entries);  
         $this->map = $this->buildSortedMap();  
     }
 
