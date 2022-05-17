@@ -18,8 +18,8 @@ final class CostItemBuilder implements \Ds\Hashable
     ) {
 
         if ($orderUnits < 1) {
-            throw new \DomainException(
-                'cost_item_builder_invalid_order_units'
+            throw new \InvalidArgumentException(
+                'invalid_order_units'
             );
         }
 
@@ -59,9 +59,7 @@ final class CostItemBuilder implements \Ds\Hashable
             return new CostItem($this->offer, $this->getQuantityNeeded());
         }
 
-        throw new \DomainException(
-            'cost_item_builder_build_not_allowed'
-        );
+        throw new \DomainException('build_not_allowed');
     }
 
     public function hash()

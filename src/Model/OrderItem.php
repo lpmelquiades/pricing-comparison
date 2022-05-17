@@ -13,6 +13,12 @@ final class OrderItem implements \Ds\Hashable
         string $product,
         int $units
     ) {
+        if (strlen(trim($product)) < 1) {
+            throw new \InvalidArgumentException('invalid_product');
+        }
+        if ($units < 1) {
+            throw new \InvalidArgumentException('invalid_units');
+        }
         $this->product = $product;
         $this->units = $units;
     }
@@ -39,11 +45,11 @@ final class OrderItem implements \Ds\Hashable
     public function equals($obj): bool
     {
         if (!is_object($obj)){
-            throw new \DomainException('invalid_object');
+            throw new \InvalidArgumentException('invalid_object');
         } 
 
         if (get_class($obj) !== static::class){
-            throw new \DomainException('invalid_object');
+            throw new \InvalidArgumentException('invalid_class');
         } 
 
         if ($obj->hash() !== $this->hash()){

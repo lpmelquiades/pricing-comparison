@@ -16,7 +16,6 @@ final class Order
         OrderItems $orderItems,
         Suppliers $suppliers
     ) {
-        
         $this->orderItems = $orderItems;
         $this->suppliers = $suppliers;
         $this->calcResultSteps();

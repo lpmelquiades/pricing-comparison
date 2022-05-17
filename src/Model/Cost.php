@@ -16,7 +16,7 @@ final class Cost implements \Ds\Hashable
         CostItems $costItems
     ) {
         if (strlen(trim($supplier)) < 1) {
-            throw new \DomainException('supplier_invalid_supplier');
+            throw new \InvalidArgumentException('invalid_supplier');
         }
         
         $this->supplier = $supplier;
@@ -60,11 +60,11 @@ final class Cost implements \Ds\Hashable
     public function equals($obj): bool
     {
         if (!is_object($obj)){
-            throw new \DomainException('invalid_object');
+            throw new \InvalidArgumentException('invalid_object');
         } 
 
         if (get_class($obj) !== static::class){
-            throw new \DomainException('invalid_object');
+            throw new \InvalidArgumentException('invalid_class');
         } 
 
         if ($obj->hash() !== $this->hash()){

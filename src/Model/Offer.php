@@ -20,19 +20,19 @@ final class Offer implements Mapable, \Ds\Hashable
     ) {
 
         if (strlen(trim($product)) < 1) {
-            throw new \DomainException('offer_invalid_product');
+            throw new \InvalidArgumentException('invalid_product');
         }
 
         if (strlen(trim($currency)) !== 3) {
-            throw new \DomainException('offer_invalid_currency');            
+            throw new \InvalidArgumentException('invalid_currency');            
         }
 
         if ($units < 1) {
-            throw new \DomainException('offer_invalid_units');
+            throw new \InvalidArgumentException('invalid_units');
         }
 
         if ($price <= 0.0) {
-            throw new \DomainException('offer_invalid_price');
+            throw new \InvalidArgumentException('invalid_price');
         }
 
         $this->product = $product;
@@ -87,11 +87,11 @@ final class Offer implements Mapable, \Ds\Hashable
     public function equals($obj): bool
     {
         if (!is_object($obj)){
-            throw new \DomainException('invalid_object');
+            throw new \InvalidArgumentException('invalid_object');
         } 
 
         if (get_class($obj) !== static::class){
-            throw new \DomainException('invalid_object');
+            throw new \InvalidArgumentException('invalid_class');
         } 
 
         if ($obj->hash() !== $this->hash()){

@@ -15,7 +15,7 @@ abstract class Set implements SetInterface
         }
 
         if(get_class($entries[0]) !== $this->getEntryClass()) {
-            throw new \InvalidArgumentException('not_same_class_entries');
+            throw new \InvalidArgumentException('invalid_class');
         }
 
         $this->set = new \Ds\Set($entries);   

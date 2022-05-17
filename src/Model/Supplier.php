@@ -16,7 +16,7 @@ final class Supplier implements \Ds\Hashable
     ) { 
 
         if (strlen(trim($name)) < 1) {
-            throw new \InvalidArgumentException('not_same_class_entries');
+            throw new \InvalidArgumentException('invalid_name');
         }
 
         $this->name = $name;
@@ -41,11 +41,11 @@ final class Supplier implements \Ds\Hashable
     public function equals($obj): bool
     {
         if (!is_object($obj)){
-            throw new \DomainException('invalid_object');
+            throw new \InvalidArgumentException('invalid_object');
         } 
 
         if (get_class($obj) !== static::class){
-            throw new \DomainException('invalid_object');
+            throw new \InvalidArgumentException('invalid_class');
         } 
 
         if ($obj->hash() !== $this->hash()){
