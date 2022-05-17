@@ -15,13 +15,11 @@ final class Order
 
     private function __construct (
         OrderItems $orderItems,
-        Suppliers $suppliers,
-        CostBuilderInterface $costBuilder
+        Suppliers $suppliers
     ) {
         
         $this->orderItems = $orderItems;
         $this->suppliers = $suppliers;
-        $this->costBuilder = $costBuilder;
         $this->calcResultSteps();
     }
 
@@ -37,7 +35,7 @@ final class Order
 
     public static function build(OrderItems $orderItems, Suppliers $suppliers)
     {
-        return new static($orderItems, $suppliers, new CostBuilder());
+        return new static($orderItems, $suppliers);
     }
 
     private function calcResultSteps(){
@@ -48,10 +46,7 @@ final class Order
 
     private function calcCosts() 
     {
-        $this->costs = $this->suppliers->calcCosts(
-            $this->costBuilder,
-            $this->orderItems
-        );
+        $this->costs = $this->suppliers->calcCosts($this->orderItems);
     }
 
     private function calcCheapest()
