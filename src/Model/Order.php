@@ -7,7 +7,6 @@ namespace PricingComparison\Model;
 final class Order
 {
     use BuildMany;
-    use OfSameClass;
 
     private $orderItems;
     private $suppliers;
@@ -70,37 +69,3 @@ final class Order
         );
     }
 }
-
-/**  
- * Example 1
- * Customer wants to buy 5 Units Dental Floss and 12 Units Ibuprofen.
- * 
- *     Cost Supplier A:
- *     5 x 1 Unit Dental Floss - 45 EUR
- *     1 x 10 Units Ibuprofen - 48 EUR
- *     2 x 1 Unit Ibuprofen - 10 EUR
- *     Total: 103 EUR
-* 
-*     Cost Supplier B:
-*     5 x 1 Unit Dental Floss - 40 EUR
-*     2 x 5 Units Ibuprofen - 50 EUR
-*     2 x 1 Unit Ibuprofen - 12 EUR
-*     Total: 102 EUR
-*     
-*     Result: Supplier B is cheaper - 102 EUR
-* 
-* Example 2
-* Customer wants to buy 105 Units Ibuprofen
-* 
-*     Cost Supplier A:
-*     10 x 10 Units Ibuprofen - 480 EUR
-*     5 x 1 Unit Ibuprofen - 25 EUR
-*     Total: 505 EUR
-* 
-*     Cost Supplier B:
-*     1 x 100 Units Ibuprofen - 410 EUR
-*     1 x 5 Units Ibuprofen - 25 EUR
-*     Total: 435 EUR
-* 
-*     Result: Supplier B is cheaper - 435 EUR
-*/

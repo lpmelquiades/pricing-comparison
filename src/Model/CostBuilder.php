@@ -11,7 +11,7 @@ final class CostBuilder implements CostBuilderInterface
         // var_dump($supplier);
         // var_dump($orderItems);
         return new Cost(
-            $supplier->getName(), 
+            $supplier->getName(),
             $this->buildCostItems($orderItems, $supplier->getOffers())
         );
     }
