@@ -1,18 +1,9 @@
-install-php:
-	sudo apt-get update \
-	&& sudo apt-get install software-properties-common \
-	&& sudo add-apt-repository ppa:ondrej/php \
-	&& sudo apt-get update \
-	&& sudo apt-get install php7.2 \
-	&& sudo apt-get install php7.2-curl php7.2-gd php7.2-json php7.2-mbstring php7.2-intl php7.2-mysql php7.2-xml php7.2-zip php7.2-ds
+run-composer:
+	docker run -v `pwd`:/app pricing-comparison-local sh -c "cd app && composer update"
 
-install-composer:
-	sudo curl -s https://getcomposer.org/installer | php \
-	&& sudo mv composer.phar /usr/local/bin/composer \
-	&& sudo rm -rf composer-setup.php
+run-test:
+	docker build local-image -t pricing-comparison-local
+	docker run -v `pwd`:/app pricing-comparison-local sh -c "cd app && composer update && composer dump-autoload && composer run testcept"
 
-configure:
-	composer update
-
-test:
-	composer run test
+build-local:
+	docker build local-image -t pricing-comparison-local

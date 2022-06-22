@@ -8,7 +8,6 @@ use PHPUnit\Framework\TestCase;
 use PricingComparison\Model\OrderItem;
 use PricingComparison\Model\OrderItems;
 use PricingComparison\UseCases\Compare;
-use PricingComparison\UseCases\CompareAction;
 use PricingComparison\UseCases\CompareHandler;
 
 class Example1Test extends TestCase 

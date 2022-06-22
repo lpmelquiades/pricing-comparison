@@ -1,14 +1,20 @@
 {
     "autoload": {
         "psr-4": {
-            "PricingComparison\\" : "src/",
-            "PricingComparison\\Tests\\" : "tests/"
+            "PricingComparison\\": "src/",
+            "PricingComparison\\Tests\\": "tests/"
         }
     },
+    "require": {
+        "php-ds/php-ds": "^1"
+    },
     "require-dev": {
-        "phpunit/phpunit": "6.4"
+        "phpunit/phpunit": "6.4",
+        "codeception/codeception": "^4",
+        "codeception/module-asserts": "^1.0.0"
     },
     "scripts": {
-        "test": "phpunit ./tests"
+        "test": "phpunit ./tests",
+        "testcept": "codecept init unit && codecept run"
     }
 }
